@@ -22,5 +22,14 @@ class UsersSeeder extends Seeder
             'nacionalidad' => 'argentino',
             'rol' => 'administrador',
         ]);
+
+        DB::table('users')->insert([
+            'id' => '2',
+            'name' => 'Fede',
+            'email' => 'iarlorifederico@gmail.com',
+            'password' => bcrypt('123'),
+            'nacionalidad' => 'argentino',
+            'rol' => 'administrador',
+        ]);
     }
 }
