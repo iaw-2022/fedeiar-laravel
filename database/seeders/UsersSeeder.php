@@ -31,5 +31,13 @@ class UsersSeeder extends Seeder
             'nacionalidad' => 'argentino',
             'rol' => 'administrador'
         ));
+
+        User::create(array(
+            'name' => 'Federico2',
+            'email' => 'fedeiarlori@hotmail.com',
+            'password' => bcrypt('123'),
+            'nacionalidad' => 'argentino',
+            'rol' => 'administrador'
+        ));
     }
 }
