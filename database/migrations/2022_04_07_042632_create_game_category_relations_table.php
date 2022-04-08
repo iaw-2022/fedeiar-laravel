@@ -13,17 +13,15 @@ return new class extends Migration
      */
     public function up()
     {
-        Schema::create('speedrun_videos', function (Blueprint $table) {
+        Schema::create('game_category_relations', function (Blueprint $table) {
             $table->id();
-            $table->string('link_video');
-            $table->float('completion_time_minutes');
-            $table->string('username');
             $table->string('nombre_juego');
             $table->string('nombre_categoria');
             $table->timestamps();
 
-            $table->foreign('username')->references('username')->on('users');
-            $table->foreign(['nombre_juego', 'nombre_categoria'])->references(['nombre_juego', 'nombre_categoria'])->on('game_category_relations');
+            $table->foreign('nombre_juego')->references('nombre')->on('juegos');
+            $table->foreign('nombre_categoria')->references('nombre')->on('categorias');
+            $table->unique(['nombre_juego', 'nombre_categoria']);
         });
     }
 
@@ -34,6 +32,6 @@ return new class extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('speedrun_videos');
+        Schema::dropIfExists('game_category_relations');
     }
 };

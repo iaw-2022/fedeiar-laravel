@@ -17,7 +17,7 @@ class UsersSeeder extends Seeder
     public function run()
     {
         User::create(array(
-            'username' => 'Juan',
+            'username' => 'juan',
             'email' => 'juan@mail.com',
             'password' => bcrypt('123'),
             'nationality' => 'argentine',
@@ -25,7 +25,7 @@ class UsersSeeder extends Seeder
         ));
 
         User::create(array(
-            'username' => 'Fede',
+            'username' => 'fede',
             'email' => 'iarlorifederico@gmail.com',
             'password' => bcrypt('123'),
             'nationality' => 'argentine',
@@ -33,8 +33,16 @@ class UsersSeeder extends Seeder
         ));
 
         User::create(array(
-            'username' => 'Federico2',
+            'username' => 'federico2',
             'email' => 'fedeiarlori@hotmail.com',
+            'password' => bcrypt('123'),
+            'nationality' => 'argentine',
+            'role' => 'administrator'
+        ));
+
+        User::create(array(
+            'username' => 'bousher',
+            'email' => 'fede@mail.com',
             'password' => bcrypt('123'),
             'nationality' => 'argentine',
             'role' => 'administrator'
