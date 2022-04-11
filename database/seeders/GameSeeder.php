@@ -16,15 +16,15 @@ class GameSeeder extends Seeder
     public function run()
     {
         Game::create(array(
-            'nombre' => 'Super Mario Bros.'
+            'name' => 'Super Mario Bros.'
         ));
 
         Game::create(array(
-            'nombre' => 'Celeste'
+            'name' => 'Celeste'
         ));
 
         Game::create(array(
-            'nombre' => 'Portal'
+            'name' => 'Portal'
         ));
     }
 }

@@ -19,24 +19,24 @@ class SpeedrunVideoSeeder extends Seeder
             'link_video' => 'link to video',
             'completion_time_minutes' => '320.5',
             'username' => 'juan',
-            'nombre_juego' => 'Portal',
-            'nombre_categoria' => 'any%',
+            'game_name' => 'Portal',
+            'category_name' => 'any%',
         ));
 
         SpeedrunVideo::create(array(
             'link_video' => 'link to video',
             'completion_time_minutes' => '243.7',
             'username' => 'juan',
-            'nombre_juego' => 'Portal',
-            'nombre_categoria' => 'any%',
+            'game_name' => 'Portal',
+            'category_name' => 'any%',
         ));
 
         SpeedrunVideo::create(array(
             'link_video' => 'link to video',
             'completion_time_minutes' => '320.5',
             'username' => 'bousher',
-            'nombre_juego' => 'Celeste',
-            'nombre_categoria' => '100%',
+            'game_name' => 'Celeste',
+            'category_name' => '100%',
         ));
     }
 }

@@ -15,13 +15,13 @@ return new class extends Migration
     {
         Schema::create('game_category_relations', function (Blueprint $table) {
             $table->id();
-            $table->string('nombre_juego');
-            $table->string('nombre_categoria');
+            $table->string('game_name');
+            $table->string('category_name');
             $table->timestamps();
 
-            $table->foreign('nombre_juego')->references('nombre')->on('games');
-            $table->foreign('nombre_categoria')->references('nombre')->on('categories');
-            $table->unique(['nombre_juego', 'nombre_categoria']);
+            $table->foreign('game_name')->references('name')->on('games');
+            $table->foreign('category_name')->references('name')->on('categories');
+            $table->unique(['game_name', 'category_name']);
         });
     }
 

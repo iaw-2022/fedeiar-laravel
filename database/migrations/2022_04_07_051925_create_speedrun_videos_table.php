@@ -18,12 +18,12 @@ return new class extends Migration
             $table->string('link_video');
             $table->float('completion_time_minutes');
             $table->string('username');
-            $table->string('nombre_juego');
-            $table->string('nombre_categoria');
+            $table->string('game_name');
+            $table->string('category_name');
             $table->timestamps();
 
-            $table->foreign('username')->references('username')->on('users');
-            $table->foreign(['nombre_juego', 'nombre_categoria'])->references(['nombre_juego', 'nombre_categoria'])->on('game_category_relations');
+            $table->foreign('username')->references('name')->on('users');
+            $table->foreign(['game_name', 'category_name'])->references(['game_name', 'category_name'])->on('game_category_relations');
         });
     }
 

@@ -1,5 +1,7 @@
 <?php
 
+use App\Http\Controllers\GamesController;
+use App\Http\Controllers\UserController;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -22,3 +24,9 @@ Route::get('/', function () {
 })->middleware(['auth'])->name('dashboard');
 
 require __DIR__.'/auth.php';
+
+Route::get('/games', [GamesController::class, 'index']);
+
+Route::get('/games/{gameName}', [GamesController::class, 'showVideos']);
+
+Route::get('/users', [UserController::class, 'index']);

@@ -16,19 +16,19 @@ class CategorySeeder extends Seeder {
     public function run() {
         
         Category::create(array(
-            'nombre' => 'any%'
+            'name' => 'any%'
         ));
 
         Category::create(array(
-            'nombre' => '100%'
+            'name' => '100%'
         ));
 
         Category::create(array(
-            'nombre' => 'low%'
+            'name' => 'low%'
         ));
 
         Category::create(array(
-            'nombre' => 'glitchless%'
+            'name' => 'glitchless%'
         ));
     }
 }

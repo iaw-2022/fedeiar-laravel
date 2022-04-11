@@ -16,23 +16,23 @@ class GameCategoryRelationSeeder extends Seeder
     public function run() {
 
         GameCategoryRelation::create(array(
-            'nombre_juego' => 'Celeste',
-            'nombre_categoria' => 'any%'
+            'game_name' => 'Celeste',
+            'category_name' => 'any%'
         ));
 
         GameCategoryRelation::create(array(
-            'nombre_juego' => 'Celeste',
-            'nombre_categoria' => '100%'
+            'game_name' => 'Celeste',
+            'category_name' => '100%'
         ));
 
         GameCategoryRelation::create(array(
-            'nombre_juego' => 'Celeste',
-            'nombre_categoria' => 'low%'
+            'game_name' => 'Celeste',
+            'category_name' => 'low%'
         ));
 
         GameCategoryRelation::create(array(
-            'nombre_juego' => 'Portal',
-            'nombre_categoria' => 'any%'
+            'game_name' => 'Portal',
+            'category_name' => 'any%'
         ));
     }
 }
