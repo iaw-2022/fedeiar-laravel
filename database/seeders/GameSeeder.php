@@ -2,11 +2,11 @@
 
 namespace Database\Seeders;
 
-use App\Models\Juego;
+use App\Models\Game;
 use Illuminate\Database\Console\Seeds\WithoutModelEvents;
 use Illuminate\Database\Seeder;
 
-class JuegoSeeder extends Seeder
+class GameSeeder extends Seeder
 {
     /**
      * Run the database seeds.
@@ -15,15 +15,15 @@ class JuegoSeeder extends Seeder
      */
     public function run()
     {
-        Juego::create(array(
+        Game::create(array(
             'nombre' => 'Super Mario Bros.'
         ));
 
-        Juego::create(array(
+        Game::create(array(
             'nombre' => 'Celeste'
         ));
 
-        Juego::create(array(
+        Game::create(array(
             'nombre' => 'Portal'
         ));
     }

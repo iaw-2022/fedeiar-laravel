@@ -5,9 +5,9 @@ namespace Database\Seeders;
 use Illuminate\Database\Console\Seeds\WithoutModelEvents;
 use Illuminate\Database\Seeder;
 use App\Models;
-use App\Models\Categoria;
+use App\Models\Category;
 
-class CategoriaSeeder extends Seeder {
+class CategorySeeder extends Seeder {
     /**
      * Run the database seeds.
      *
@@ -15,19 +15,19 @@ class CategoriaSeeder extends Seeder {
      */
     public function run() {
         
-        Categoria::create(array(
+        Category::create(array(
             'nombre' => 'any%'
         ));
 
-        Categoria::create(array(
+        Category::create(array(
             'nombre' => '100%'
         ));
 
-        Categoria::create(array(
+        Category::create(array(
             'nombre' => 'low%'
         ));
 
-        Categoria::create(array(
+        Category::create(array(
             'nombre' => 'glitchless%'
         ));
     }

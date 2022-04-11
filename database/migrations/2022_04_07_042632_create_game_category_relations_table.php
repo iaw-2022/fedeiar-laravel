@@ -19,8 +19,8 @@ return new class extends Migration
             $table->string('nombre_categoria');
             $table->timestamps();
 
-            $table->foreign('nombre_juego')->references('nombre')->on('juegos');
-            $table->foreign('nombre_categoria')->references('nombre')->on('categorias');
+            $table->foreign('nombre_juego')->references('nombre')->on('games');
+            $table->foreign('nombre_categoria')->references('nombre')->on('categories');
             $table->unique(['nombre_juego', 'nombre_categoria']);
         });
     }
