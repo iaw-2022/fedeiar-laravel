@@ -26,8 +26,8 @@ Route::get('/', function () {
 
 require __DIR__.'/auth.php';
 
-Route::get('/games', [GamesController::class, 'index']);
+Route::get('/games', [GamesController::class, 'index'])->middleware(['auth']);
 
-Route::get('/games/{gameName}', [SpeedrunVideoController::class, 'index']);
+Route::get('/games/{gameName}', [SpeedrunVideoController::class, 'index'])->middleware(['auth']);
 
-Route::get('/users', [UserController::class, 'index']);
+Route::get('/users', [UserController::class, 'index'])->middleware(['auth']);
