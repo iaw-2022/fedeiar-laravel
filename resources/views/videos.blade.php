@@ -9,28 +9,20 @@
 @section('page content')
 
 <ul class="nav nav-tabs" id="myTab" role="tablist">
-    <a href='/games/{{ $gameName }}/'>
-        <li class="nav-item" role="presentation">
-            <button class="nav-link" id="home-tab" data-bs-toggle="tab" data-bs-target="#home" type="button" role="tab">
+        <li class="nav-item">
+            <button class="nav-link" id="all-btn" type="button">
                 All
             </button>
         </li>
-    </a>
     @foreach($categories as $category)
-        <a href='/games/{{ $gameName }}/{{ $category->category_name }}'>
-            <li class="nav-item" role="presentation">
-                <button class="nav-link" id="home-tab" data-bs-toggle="tab" data-bs-target="#home" type="button" role="tab">
-                    {{$category->category_name}}
-                </button>
-            </li>
-        </a>
+        <li class="nav-item" role="presentation">
+            <button class="nav-link" id="{{$category->category_name}}" type="button">
+                {{$category->category_name}}
+            </button>
+        </li>
     @endforeach
 </ul>
-<div class="tab-content" id="myTabContent">
-    <!-- <div class="tab-pane fade show active" id="home" role="tabpanel" aria-labelledby="home-tab">...</div> -->
-    <div class="tab-pane fade" id="profile" role="tabpanel" aria-labelledby="profile-tab">...</div>
-    <div class="tab-pane fade" id="contact" role="tabpanel" aria-labelledby="contact-tab">...</div>
-</div>
+
 
 <table id="videosTable" class="table table-bordered">
     <thead>
@@ -57,7 +49,12 @@
 <!-- Scripts -->
 <script>
     $(document).ready(function() {
-        $('#videosTable').DataTable();
+        var table = $('#videosTable').DataTable();
+        $('#all-btn').click(function(){
+            table.search('').draw();
+        });
+
+
     });
 </script>
 
