@@ -8,22 +8,6 @@
 
 @section('page content')
 
-<ul class="nav nav-tabs" id="myTab" role="tablist">
-        <li class="nav-item">
-            <button class="nav-link" id="all-btn" type="button">
-                All
-            </button>
-        </li>
-    @foreach($categories as $category)
-        <li class="nav-item" role="presentation">
-            <button class="nav-link" id="{{$category->category_name}}" type="button">
-                {{$category->category_name}}
-            </button>
-        </li>
-    @endforeach
-</ul>
-
-
 <table id="videosTable" class="table table-bordered">
     <thead>
         <tr>
@@ -43,19 +27,43 @@
         </tr>
         @endforeach
     </tbody>
+    <tfoot>
+            <tr>
+                <th>Id</th>
+                <th>Game Name</th>
+                <th>Category</th>
+                <th>Completion time (in minutes)</th>
+            </tr>
+    </tfoot>
 </table>
 
 
 <!-- Scripts -->
 <script>
     $(document).ready(function() {
-        var table = $('#videosTable').DataTable();
-        $('#all-btn').click(function(){
-            table.search('').draw();
-        });
-
-
-    });
+    $('#videosTable').DataTable( {
+        initComplete: function () {
+            this.api().columns().every( function () {
+                var column = this;
+                var select = $('<select><option value=""></option></select>')
+                    .appendTo( $(column.footer()).empty() )
+                    .on( 'change', function () {
+                        var val = $.fn.dataTable.util.escapeRegex(
+                            $(this).val()
+                        );
+ 
+                        column
+                            .search( val ? '^'+val+'$' : '', true, false )
+                            .draw();
+                    } );
+ 
+                column.data().unique().sort().each( function ( d, j ) {
+                    select.append( '<option value="'+d+'">'+d+'</option>' )
+                } );
+            } );
+        }
+    } );
+} );
 </script>
 
 @endsection

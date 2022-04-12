@@ -30,6 +30,4 @@ Route::get('/games', [GamesController::class, 'index']);
 
 Route::get('/games/{gameName}', [SpeedrunVideoController::class, 'index']);
 
-Route::get('games/{gameName}/{categoryName}', [SpeedrunVideoController::class, 'showCategoryVideos']);
-
 Route::get('/users', [UserController::class, 'index']);

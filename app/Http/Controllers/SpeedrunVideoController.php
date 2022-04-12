@@ -21,16 +21,6 @@ class SpeedrunVideoController extends Controller
         return view('videos', ['gameName' => $gameName, 'categories' => $categories, 'videos' => $videos]);
     }
 
-    public function showCategoryVideos($gameName, $categoryName){
-        $videos = SpeedrunVideo::where('game_name', $gameName);
-        $videos = $videos->where('category_name', $categoryName)->get();
-
-        $categories = GameCategoryRelation::where('game_name', $gameName)->get();
-        
-        return view('videos', ['gameName' => $gameName, 'categories' => $categories, 'videos' => $videos]);
-    }
-
-
     /**
      * Show the form for creating a new resource.
      *
