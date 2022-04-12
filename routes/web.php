@@ -1,6 +1,7 @@
 <?php
 
 use App\Http\Controllers\GamesController;
+use App\Http\Controllers\SpeedrunVideoController;
 use App\Http\Controllers\UserController;
 use Illuminate\Support\Facades\Route;
 
@@ -27,6 +28,8 @@ require __DIR__.'/auth.php';
 
 Route::get('/games', [GamesController::class, 'index']);
 
-Route::get('/games/{gameName}', [GamesController::class, 'showVideos']);
+Route::get('/games/{gameName}', [SpeedrunVideoController::class, 'index']);
+
+Route::get('games/{gameName}/{categoryName}', [SpeedrunVideoController::class, 'showCategoryVideos']);
 
 Route::get('/users', [UserController::class, 'index']);

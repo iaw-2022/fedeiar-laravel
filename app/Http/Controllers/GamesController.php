@@ -46,10 +46,9 @@ class GamesController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function showVideos($gameName)
+    public function show($id)
     {
-        $videos = SpeedrunVideo::where('game_name', $gameName)->get();
-        return view('videos', ['gameName' => $gameName, 'videos' => $videos]);
+        //
     }
 
     /**

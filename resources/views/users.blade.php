@@ -7,7 +7,7 @@
 @endsection
 
 @section('page content')
-<table class="table table-bordered">
+<table id="usersTable" class="table table-bordered">
     <thead>
         <tr>
             <th scope="col">Id</th>
@@ -18,11 +18,18 @@
     <tbody>
         @foreach($users as $user)
             <tr>
-                <th scope="row">{{ $user->id }}</th>
+                <td>{{ $user->id }}</td>
                 <td> {{ $user->name }}</td>
                 <td> {{ $user->role }}</td>
             </tr>
         @endforeach
     </tbody>
 </table>
+
+<!-- Scripts -->
+<script>
+    $(document).ready(function() {
+        $('#usersTable').DataTable();
+    });
+</script>
 @endsection

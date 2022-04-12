@@ -38,5 +38,21 @@ class SpeedrunVideoSeeder extends Seeder
             'game_name' => 'Celeste',
             'category_name' => '100%',
         ));
+
+        SpeedrunVideo::create(array(
+            'link_video' => 'link to video',
+            'completion_time_minutes' => '324.5',
+            'username' => 'juan',
+            'game_name' => 'Celeste',
+            'category_name' => '100%',
+        ));
+
+        SpeedrunVideo::create(array(
+            'link_video' => 'link to video',
+            'completion_time_minutes' => '115.73',
+            'username' => 'juan',
+            'game_name' => 'Celeste',
+            'category_name' => 'any%',
+        ));
     }
 }

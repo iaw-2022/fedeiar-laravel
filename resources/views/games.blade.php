@@ -7,29 +7,29 @@
 @endsection
 
 @section('page content')
-<table id="gamesTable" class="display" style="width:100%">
-    <thead>
-        <tr>
-            <th>Id</th>
-            <th>Game Name</th>
-        </tr>
-    </thead>
-    <tbody>
-        @foreach($games as $game)
+<div class="container">
+    <table id="gamesTable" class="table table-bordered" style="width:100%">
+        <thead>
             <tr>
-                <th scope="row">{{ $game->id }}</th>
-               <td> <a href='/games/{{ $game->name }}' class="text-primary"><u>{{ $game->name }}</u></a></td>
+                <th>Id</th>
+                <th>Game Name</th>
             </tr>
-        @endforeach
-    </tbody>
-</table>
-
+        </thead>
+        <tbody>
+            @foreach($games as $game)
+            <tr>
+                <td>{{ $game->id }}</td>
+                <td> <a href='/games/{{ $game->name }}' class="text-primary"><u>{{ $game->name }}</u></a></td>
+            </tr>
+            @endforeach
+        </tbody>
+    </table>
+</div>
 
 <!-- Scripts -->
 <script>
     $(document).ready(function() {
         $('#gamesTable').DataTable();
-    } );
+    });
 </script>
 @endsection
-
