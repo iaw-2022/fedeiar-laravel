@@ -8,12 +8,16 @@
 
 @section('page content')
 
+<div id='categoryFilter'>
+    Select Category
+</div>
+
 <table id="videosTable" class="table table-bordered">
     <thead>
         <tr>
             <th scope="col">Id</th>
             <th scope="col">Game Name</th>
-            <th scope="col">Category</th>
+            <th id='#categoryColumn' scope="col">Category</th>
             <th scope="col">Completion time (in minutes)</th>
         </tr>
     </thead>
@@ -43,15 +47,15 @@
     $(document).ready(function() {
     $('#videosTable').DataTable( {
         initComplete: function () {
-            this.api().columns().every( function () {
+            this.api().columns(2).every( function () {
                 var column = this;
-                var select = $('<select><option value=""></option></select>')
-                    .appendTo( $(column.footer()).empty() )
+                var select = $('<select><option value="">Show All</option></select>')
+                    .appendTo( '#categoryFilter' )
                     .on( 'change', function () {
                         var val = $.fn.dataTable.util.escapeRegex(
                             $(this).val()
                         );
- 
+
                         column
                             .search( val ? '^'+val+'$' : '', true, false )
                             .draw();
