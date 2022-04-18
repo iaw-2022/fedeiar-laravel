@@ -26,5 +26,17 @@ class GameSeeder extends Seeder
         Game::create(array(
             'name' => 'Portal'
         ));
+
+        Game::create(array(
+            'name' => 'Hollow Knight'
+        ));
+
+        Game::create(array(
+            'name' => 'Super Mario 64'
+        ));
+
+        Game::create(array(
+            'name' => 'The Legend of Zelda: Ocarina of Time'
+        ));
     }
 }

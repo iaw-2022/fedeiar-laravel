@@ -28,7 +28,7 @@ class CategorySeeder extends Seeder {
         ));
 
         Category::create(array(
-            'name' => 'glitchless%'
+            'name' => 'glitchless'
         ));
     }
 }

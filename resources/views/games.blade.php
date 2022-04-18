@@ -1,9 +1,9 @@
 @extends('layouts.app')
 
 @section('header')
-<h2>
+<h1 class="display-5 text-left">
     Games
-</h2>
+</h1>
 @endsection
 
 @section('page content')

@@ -34,5 +34,35 @@ class GameCategoryRelationSeeder extends Seeder
             'game_name' => 'Portal',
             'category_name' => 'any%'
         ));
+
+        GameCategoryRelation::create(array(
+            'game_name' => 'Super Mario 64',
+            'category_name' => 'any%'
+        ));
+
+        GameCategoryRelation::create(array(
+            'game_name' => 'Super Mario 64',
+            'category_name' => '100%'
+        ));
+
+        GameCategoryRelation::create(array(
+            'game_name' => 'Super Mario 64',
+            'category_name' => 'glitchless'
+        ));
+
+        GameCategoryRelation::create(array(
+            'game_name' => 'Hollow Knight',
+            'category_name' => 'any%'
+        ));
+
+        GameCategoryRelation::create(array(
+            'game_name' => 'Hollow Knight',
+            'category_name' => '100%'
+        ));
+
+        GameCategoryRelation::create(array(
+            'game_name' => 'Hollow Knight',
+            'category_name' => 'low%'
+        ));
     }
 }

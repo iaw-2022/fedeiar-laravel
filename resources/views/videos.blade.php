@@ -1,24 +1,26 @@
 @extends('layouts.app')
 
 @section('header')
-<h2>
+<h1 class="display-5 text-left">
     Speedrun videos of {{ $gameName }}
-</h2>
+</h1>
 @endsection
 
 @section('page content')
 
-<div id='categoryFilter'>
-    Select Category
-</div>
+<p id='categoryFilter' class="fs-5">
+    Select Category :
+</p>
 
 <table id="videosTable" class="table table-bordered">
     <thead>
         <tr>
-            <th scope="col">Id</th>
+            <th scope="col">Position</th>
+            <th scope="col">User</th>
             <th scope="col">Game Name</th>
-            <th id='#categoryColumn' scope="col">Category</th>
+            <th scope="col">Category</th>
             <th scope="col">Completion time (in minutes)</th>
+            <th scope="col">link to video</th>
         </tr>
     </thead>
     <tbody>
@@ -26,19 +28,13 @@
         <tr>
             <td>{{ $video->id }}</td>
             <td>{{ $video->username }}</td>
+            <td>{{ $video->game_name }}</td>
             <td>{{ $video->category_name }}</td>
             <td>{{ $video->completion_time_minutes }}</td>
+            <td>{{ $video->link_video }}</td>
         </tr>
         @endforeach
     </tbody>
-    <tfoot>
-            <tr>
-                <th>Id</th>
-                <th>Game Name</th>
-                <th>Category</th>
-                <th>Completion time (in minutes)</th>
-            </tr>
-    </tfoot>
 </table>
 
 
@@ -46,8 +42,11 @@
 <script>
     $(document).ready(function() {
     $('#videosTable').DataTable( {
+
+        "order":[[4, "asc"]],
+
         initComplete: function () {
-            this.api().columns(2).every( function () {
+            this.api().columns(3).every( function () {
                 var column = this;
                 var select = $('<select><option value="">Show All</option></select>')
                     .appendTo( '#categoryFilter' )
@@ -66,6 +65,7 @@
                 } );
             } );
         }
+
     } );
 } );
 </script>

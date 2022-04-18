@@ -20,7 +20,7 @@ class UsersSeeder extends Seeder
             'name' => 'juan',
             'email' => 'juan@mail.com',
             'password' => bcrypt('123'),
-            'nationality' => 'argentine',
+            'nationality' => 'Argentina',
             'role' => 'administrator',
         ));
 
@@ -28,15 +28,15 @@ class UsersSeeder extends Seeder
             'name' => 'fede',
             'email' => 'iarlorifederico@gmail.com',
             'password' => bcrypt('123'),
-            'nationality' => 'argentine',
+            'nationality' => 'Argentina',
             'role' => 'administrator'
         ));
 
         User::create(array(
-            'name' => 'federico2',
+            'name' => 'federico',
             'email' => 'fedeiarlori@hotmail.com',
             'password' => bcrypt('123'),
-            'nationality' => 'argentine',
+            'nationality' => 'Argentina',
             'role' => 'administrator'
         ));
 
@@ -44,7 +44,15 @@ class UsersSeeder extends Seeder
             'name' => 'bousher',
             'email' => 'fede@mail.com',
             'password' => bcrypt('123'),
-            'nationality' => 'argentine',
+            'nationality' => 'Argentina',
+            'role' => 'administrator'
+        ));
+
+        User::create(array(
+            'name' => 'peter',
+            'email' => 'peter@mail.com',
+            'password' => bcrypt('123'),
+            'nationality' => 'United States',
             'role' => 'administrator'
         ));
     }

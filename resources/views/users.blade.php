@@ -1,9 +1,9 @@
 @extends('layouts.app')
 
 @section('header')
-<h2>
+<h1 class="display-5 text-left">
     Registered Users
-</h2>
+</h1>
 @endsection
 
 @section('page content')
@@ -12,7 +12,9 @@
         <tr>
             <th scope="col">Id</th>
             <th scope="col">Username</th>
+            <th scope="col">Email</th>
             <th scope="col">Role</th>
+            <th scope="col">Nationality</th>
         </tr>
     </thead>
     <tbody>
@@ -20,7 +22,9 @@
             <tr>
                 <td>{{ $user->id }}</td>
                 <td> {{ $user->name }}</td>
+                <td> {{ $user->email }}</td>
                 <td> {{ $user->role }}</td>
+                <td> {{ $user->nationality }}</td>
             </tr>
         @endforeach
     </tbody>
