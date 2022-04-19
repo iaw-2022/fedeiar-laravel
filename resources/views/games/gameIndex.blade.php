@@ -8,7 +8,7 @@
 
 @section('page content')
 
-<a class="btn btn-primary mb-2" href="games/create" role="button">Add Game</a>
+<a class="btn btn-success mb-2" href="games/create" role="button">Add Game</a>
 
 <table id="gamesTable" class="table table-bordered" style="width:100%">
     <thead>
