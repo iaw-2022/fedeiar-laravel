@@ -8,11 +8,14 @@
 
 @section('page content')
 
+<a class="btn btn-primary mb-2" href="games/create" role="button">Add Game</a>
+
 <table id="gamesTable" class="table table-bordered" style="width:100%">
     <thead>
         <tr>
             <th>Id</th>
             <th>Game Name</th>
+            <th>Acciones</th>
         </tr>
     </thead>
     <tbody>
@@ -20,6 +23,10 @@
         <tr>
             <td>{{ $game->id }}</td>
             <td> <a href='/games/{{ $game->name }}' class="text-primary"><u>{{ $game->name }}</u></a></td>
+            <td>
+                <a class="btn btn-info">Edit</a>
+                <a class="btn btn-danger">Delete</a>
+            </td>
         </tr>
         @endforeach
     </tbody>

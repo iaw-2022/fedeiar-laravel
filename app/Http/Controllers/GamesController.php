@@ -16,7 +16,7 @@ class GamesController extends Controller
     public function index()
     {
         $games = Game::all();
-        return view('games', ['games' => $games]);
+        return view('games.gameIndex', ['games' => $games]);
     }
 
     /**
@@ -26,7 +26,7 @@ class GamesController extends Controller
      */
     public function create()
     {
-        //
+        return view('games.gameCreate');
     }
 
     /**
@@ -37,7 +37,13 @@ class GamesController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        $game = new Game();
+
+        $game->name = $request->get('gameName');
+
+        $game->save();
+
+        return redirect('/games');
     }
 
     /**
