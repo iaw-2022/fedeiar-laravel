@@ -19,7 +19,6 @@ class DatabaseSeeder extends Seeder
         $this->call(UsersSeeder::class);
         $this->call(GameSeeder::class);
         $this->call(CategorySeeder::class);
-        $this->call(GameCategoryRelationSeeder::class);
         $this->call(SpeedrunVideoSeeder::class);
     }
 }

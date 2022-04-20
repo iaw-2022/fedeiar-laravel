@@ -8,6 +8,8 @@
 
 @section('page content')
 
+<a class="btn btn-success mb-2" href="/games/{{$gameName}}/create" role="button">Add Run</a>
+
 <p id='categoryFilter' class="fs-5">
     Select Category :
 </p>
@@ -40,6 +42,8 @@
 
 <!-- Scripts -->
 <script>
+    let allCategories = <?php echo json_encode($categories); ?>;
+    
     $(document).ready(function() {
     $('#videosTable').DataTable( {
 
@@ -60,8 +64,8 @@
                             .draw();
                     } );
  
-                column.data().unique().sort().each( function ( d, j ) {
-                    select.append( '<option value="'+d+'">'+d+'</option>' )
+                allCategories.forEach( function ( categoryName ) {
+                    select.append( '<option value="'+categoryName.category_name+'">'+categoryName.category_name+'</option>' )
                 } );
             } );
         }

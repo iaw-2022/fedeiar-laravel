@@ -86,5 +86,21 @@ class SpeedrunVideoSeeder extends Seeder
             'game_name' => 'Super Mario 64',
             'category_name' => '100%',
         ));
+        
+        SpeedrunVideo::create(array(
+            'link_video' => 'link to video',
+            'completion_time_minutes' => '120.32',
+            'username' => 'peter',
+            'game_name' => 'Super Mario 64',
+            'category_name' => 'low%',
+        ));
+
+        SpeedrunVideo::create(array(
+            'link_video' => 'link to video',
+            'completion_time_minutes' => '115.99',
+            'username' => 'juan',
+            'game_name' => 'Super Mario 64',
+            'category_name' => 'low%',
+        ));
     }
 }

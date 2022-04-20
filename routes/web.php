@@ -26,11 +26,11 @@ Route::get('/', function () {
 
 require __DIR__.'/auth.php';
 
-Route::resource('/games', GamesController::class, array('only' => array('index', 'create', 'store') ) );
+Route::resource('/games', GamesController::class, array('only' => array('index', 'create', 'store') ) )->middleware(['auth']);
 /*
 Route::get('/games', [GamesController::class, 'index'])->middleware(['auth']);
 Route::get('/games/create', [GamesController::class, 'create'])->middleware(['auth']);
 */
-Route::get('/games/{gameName}', [SpeedrunVideoController::class, 'index'])->middleware(['auth']);
+Route::resource('/games/{gameName}', SpeedrunVideoController::class, array('only' => array('index', 'create') ) )->middleware(['auth']);
 
 Route::get('/users', [UserController::class, 'index'])->middleware(['auth']);

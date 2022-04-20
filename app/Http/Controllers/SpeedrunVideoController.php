@@ -16,7 +16,7 @@ class SpeedrunVideoController extends Controller
      */
     public function index($gameName){
         $videos = SpeedrunVideo::where('game_name', $gameName)->get();
-        $categories = GameCategoryRelation::where('game_name', $gameName)->get();
+        $categories = Category::where('game_name', $gameName)->get();
         
         return view('videos.videoIndex', ['gameName' => $gameName, 'categories' => $categories, 'videos' => $videos]);
     }
@@ -26,9 +26,12 @@ class SpeedrunVideoController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function create()
+    public function create($gameName)
     {
-        //
+        $videos = SpeedrunVideo::where('game_name', $gameName)->get();
+        $categories = Category::where('game_name', $gameName)->get();
+
+        return view('videos.videoCreate', ['gameName' => $gameName, 'categories' => $categories]);
     }
 
     /**
@@ -37,9 +40,15 @@ class SpeedrunVideoController extends Controller
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
-    public function store(Request $request)
+    public function store(Request $request, $gameName)
     {
-        //
+
+        $speedrunVideo = new SpeedrunVideo();
+
+        $speedrunVideo->username = auth()->user()->name;
+        //$speedrunVideo->game_name = 
+
+
     }
 
     /**

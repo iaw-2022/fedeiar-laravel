@@ -23,7 +23,7 @@ return new class extends Migration
             $table->timestamps();
 
             $table->foreign('username')->references('name')->on('users');
-            $table->foreign(['game_name', 'category_name'])->references(['game_name', 'category_name'])->on('game_category_relations');
+            $table->foreign(['game_name', 'category_name'])->references(['game_name', 'category_name'])->on('categories');
         });
     }
 

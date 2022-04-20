@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Category;
 use App\Models\Game;
 use App\Models\SpeedrunVideo;
 use Illuminate\Http\Request;
@@ -37,11 +38,26 @@ class GamesController extends Controller
      */
     public function store(Request $request)
     {
-        $game = new Game();
 
+        $request->validate([
+            'gameName' => 'required',
+            'categoryName' => 'required|array|min:1',
+            'categoryName.*' => 'required'
+        ]);
+
+        $game = new Game();
+        
         $game->name = $request->get('gameName');
+        $categories = $request->input('categoryName.*');
 
         $game->save();
+
+        foreach($categories as $categoryName){
+            $category = new Category();
+            $category->game_name = $request->get('gameName');
+            $category->category_name = $categoryName;
+            $category->save();
+        }
 
         return redirect('/games');
     }

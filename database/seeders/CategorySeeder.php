@@ -16,19 +16,58 @@ class CategorySeeder extends Seeder {
     public function run() {
         
         Category::create(array(
-            'name' => 'any%'
+            'game_name' => 'Celeste',
+            'category_name' => 'any%'
         ));
 
         Category::create(array(
-            'name' => '100%'
+            'game_name' => 'Celeste',
+            'category_name' => '100%'
         ));
 
         Category::create(array(
-            'name' => 'low%'
+            'game_name' => 'Celeste',
+            'category_name' => 'low%'
         ));
 
         Category::create(array(
-            'name' => 'glitchless'
+            'game_name' => 'Portal',
+            'category_name' => 'any%'
+        ));
+
+        Category::create(array(
+            'game_name' => 'Super Mario 64',
+            'category_name' => 'any%'
+        ));
+
+        Category::create(array(
+            'game_name' => 'Super Mario 64',
+            'category_name' => '100%'
+        ));
+
+        Category::create(array(
+            'game_name' => 'Super Mario 64',
+            'category_name' => 'low%'
+        ));
+
+        Category::create(array(
+            'game_name' => 'Super Mario 64',
+            'category_name' => 'glitchless'
+        ));
+
+        Category::create(array(
+            'game_name' => 'Hollow Knight',
+            'category_name' => 'any%'
+        ));
+
+        Category::create(array(
+            'game_name' => 'Hollow Knight',
+            'category_name' => '100%'
+        ));
+
+        Category::create(array(
+            'game_name' => 'Hollow Knight',
+            'category_name' => 'low%'
         ));
     }
 }
