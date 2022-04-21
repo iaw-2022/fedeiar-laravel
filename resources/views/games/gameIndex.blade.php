@@ -24,13 +24,16 @@
             <td>{{ $game->id }}</td>
             <td> <a href='/games/{{ $game->name }}' class="text-primary"><u>{{ $game->name }}</u></a></td>
             <td>
-                <a class="btn btn-info">Edit</a>
+                <a class="btn btn-info" href="games/{{$game->name}}/edit">Edit</a>
                 <a class="btn btn-danger">Delete</a>
             </td>
         </tr>
         @endforeach
     </tbody>
 </table>
+
+
+@include('components.flash')
 
 
 <!-- Scripts -->

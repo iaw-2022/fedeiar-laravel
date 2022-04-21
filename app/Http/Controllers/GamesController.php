@@ -6,6 +6,7 @@ use App\Models\Category;
 use App\Models\Game;
 use App\Models\SpeedrunVideo;
 use Illuminate\Http\Request;
+use Illuminate\Validation\Rule;
 
 class GamesController extends Controller
 {
@@ -38,12 +39,19 @@ class GamesController extends Controller
      */
     public function store(Request $request)
     {
-
         $request->validate([
-            'gameName' => 'required',
+            'gameName' => 'required|unique:games,name',
             'categoryName' => 'required|array|min:1',
-            'categoryName.*' => 'required'
-        ]);
+            'categoryName.*' => 'required'//|unique:categories,game_name,category_name'
+            //'categoryName.*' => ['required', Rule::unique('categories')]
+        ],
+        [
+            'gameName.unique' => 'The game name has already been created.',
+            'categoryName.required' => 'Add at least one category.',
+            'categoryName.*.required' => 'Category name cannot be empty!',
+            'categoryName.*.unique' => 'The category for this game has already been created.'
+        ]
+        );
 
         $game = new Game();
         
@@ -59,7 +67,9 @@ class GamesController extends Controller
             $category->save();
         }
 
-        return redirect('/games');
+        //session()->flash('success', 'Game was added succesfully!');
+
+        return redirect('/games')->with('success', 'Game was added succesfully!');
     }
 
     /**
@@ -79,9 +89,10 @@ class GamesController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function edit($id)
+    public function edit($gameName)
     {
-        //
+        $categories = Category::where('game_name', $gameName)->get();
+        return view('games.gameEdit', ['gameName' => $gameName, 'categories' => $categories]);
     }
 
     /**
@@ -91,9 +102,44 @@ class GamesController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, $id)
+    public function update(Request $request, $gameName)
     {
-        //
+        /*
+        $request->validate([
+            'gameName' => ['required', Rule::unique('games', 'name')->ignore($gameName)],
+            'categoryName' => 'required|array|min:1',
+            'categoryName.*' => 'required'//|unique:categories,game_name,category_name'
+            //'categoryName.*' => ['required', Rule::unique('categories')]
+        ],
+        [
+            'gameName.unique' => 'The game name has already been created.',
+            'categoryName.required' => 'Add at least one category.',
+            'categoryName.*.required' => 'Category name cannot be empty!',
+            'categoryName.*.unique' => 'The category for this game has already been created.'
+        ]
+        );
+        */
+        
+        $oldCategories = Category::where('game_name', $gameName)->get();
+        $newCategories = $request->input('categoryName.*');
+
+        //recorrer los dos arreglos, quedarse con los que sobrevivieron, y borrar los registros de los viejos que no sobrevivieron tanto en speedrun_videos como en categories.
+
+        $game = Game::where('name', $gameName)->get();
+
+        $game->name = $request->get('gameName');
+        
+
+        $game->save();
+
+        foreach($newCategories as $categoryName){
+            $category = new Category();
+            $category->game_name = $request->get('gameName');
+            $category->category_name = $categoryName;
+            $category->save();
+        }
+
+        return redirect('/games')->with('success', 'Game was updated succesfully!');
     }
 
     /**
