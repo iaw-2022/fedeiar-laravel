@@ -21,7 +21,7 @@ return new class extends Migration
 
             $table->unique(['game_name', 'category_name']);
             
-            $table->foreign('game_name')->references('name')->on('games')->onDelete('cascade');
+            $table->foreign('game_name')->references('name')->on('games')->onDelete('cascade')->onUpdate('cascade');
         });
     }
 

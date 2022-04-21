@@ -61,10 +61,11 @@ class GamesController extends Controller
         $game->save();
 
         foreach($categories as $categoryName){
-            $category = new Category();
-            $category->game_name = $request->get('gameName');
-            $category->category_name = $categoryName;
-            $category->save();
+            //si el nombre ya está en categories, no agregarlo.
+                $category = new Category();
+                $category->game_name = $request->get('gameName');
+                $category->category_name = $categoryName;
+                $category->save();
         }
 
         //session()->flash('success', 'Game was added succesfully!');
@@ -104,12 +105,11 @@ class GamesController extends Controller
      */
     public function update(Request $request, $gameName)
     {
-        /*
+        
         $request->validate([
             'gameName' => ['required', Rule::unique('games', 'name')->ignore($gameName)],
             'categoryName' => 'required|array|min:1',
-            'categoryName.*' => 'required'//|unique:categories,game_name,category_name'
-            //'categoryName.*' => ['required', Rule::unique('categories')]
+            'categoryName.*' => 'required'
         ],
         [
             'gameName.unique' => 'The game name has already been created.',
@@ -118,13 +118,13 @@ class GamesController extends Controller
             'categoryName.*.unique' => 'The category for this game has already been created.'
         ]
         );
-        */
+        
         
         $oldCategories = Category::where('game_name', $gameName)->get();
         $newCategories = $request->input('categoryName.*');
 
         foreach($oldCategories as $oldCategory){
-            if(!in_array($oldCategory->name, $newCategories)){
+            if(!in_array($oldCategory->category_name, $newCategories)){
                 $oldCategory->delete();
             }
         }
@@ -136,10 +136,13 @@ class GamesController extends Controller
         $game->update();
 
         foreach($newCategories as $categoryName){
-            $category = new Category();
-            $category->game_name = $request->get('gameName');
-            $category->category_name = $categoryName;
-            $category->save();
+            if(!$oldCategories->contains('category_name', $categoryName)){
+                //si el nombre ya está en categories, no agregarlo.
+                $category = new Category();
+                $category->game_name = $request->get('gameName');
+                $category->category_name = $categoryName;
+                $category->save();
+            }
         }
 
         return redirect('/games')->with('success', 'Game was updated succesfully!');
