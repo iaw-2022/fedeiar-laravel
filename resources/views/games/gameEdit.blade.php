@@ -75,9 +75,6 @@
 </form>
 
 
-    
-
-
 <script>
     var count = 0;
     let categoryButton = document.getElementById("addCategoryButton");

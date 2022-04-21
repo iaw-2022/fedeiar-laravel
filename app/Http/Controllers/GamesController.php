@@ -123,14 +123,17 @@ class GamesController extends Controller
         $oldCategories = Category::where('game_name', $gameName)->get();
         $newCategories = $request->input('categoryName.*');
 
-        //recorrer los dos arreglos, quedarse con los que sobrevivieron, y borrar los registros de los viejos que no sobrevivieron tanto en speedrun_videos como en categories.
+        foreach($oldCategories as $oldCategory){
+            if(!in_array($oldCategory->name, $newCategories)){
+                $oldCategory->delete();
+            }
+        }
 
-        $game = Game::where('name', $gameName)->get();
+        $game = Game::where('name', $gameName)->first();
 
         $game->name = $request->get('gameName');
-        
 
-        $game->save();
+        $game->update();
 
         foreach($newCategories as $categoryName){
             $category = new Category();
