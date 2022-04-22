@@ -25,7 +25,7 @@
             <td> <a href='/games/{{ $game->name }}' class="text-primary"><u>{{ $game->name }}</u></a></td>
             <td>
                 <a class="btn btn-info" href="games/{{$game->name}}/edit">Edit</a>
-                <a class="btn btn-danger" data-bs-toggle="modal" data-bs-target="#exampleModal">Delete</a>
+                <a class="btn btn-danger" data-bs-toggle="modal" data-bs-target="#exampleModal" data-game="{{$game->name}}">Delete</a>
             </td>
         </tr>
         @endforeach
@@ -38,32 +38,44 @@
     <div class="modal-dialog">
         <div class="modal-content">
             <div class="modal-header">
-                <h5 class="modal-title" id="exampleModalLabel">Delete game</h5>
+                <h5 class="modal-title" id="exampleModalLabel">
+                    <!-- Text title from the javascript below -->
+                </h5>
                 <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
             </div>
             <div class="modal-body">
-                Are you sure you want to delete the game? All the videos associated will be deleted.
+                <!-- Text body from the javascript below -->
             </div>
             <div class="modal-footer">
                 <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
-                <form method="POST" action="/games/nombrejuego?/delete">
+                <form id="deleteForm" method="POST" action="">
                     @csrf
                     @method('DELETE')
-                    <button type="button" class="btn btn-primary">Confirm</button>
+                    <button type="submit" class="btn btn-primary">Confirm</button>
                 </form>
             </div>
         </div>
     </div>
 </div>
 
-
 @include('components.flash')
-
 
 <!-- Scripts -->
 <script>
     $(document).ready(function() {
         $('#gamesTable').DataTable();
     });
+</script>
+
+<script>
+    $('#exampleModal').on('show.bs.modal', function(event) {
+        var button = $(event.relatedTarget); // Button that triggered the modal
+        var gameName = button.data('game'); // Extract info from data-* attributes
+
+        var modal = $(this)
+        modal.find('.modal-title').text('Delete '+gameName);
+        modal.find('.modal-body').text('Are you sure you want to delete '+gameName+'? All the videos associated will be deleted.');
+        $('#deleteForm').attr('action', 'games/'+gameName);
+    })
 </script>
 @endsection

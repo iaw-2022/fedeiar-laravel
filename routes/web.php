@@ -26,11 +26,8 @@ Route::get('/', function () {
 
 require __DIR__.'/auth.php';
 
-Route::resource('/games', GamesController::class, array('only' => array('index', 'create', 'store', 'edit', 'update', 'delete') ) )->middleware(['auth']);
-/*
-Route::get('/games', [GamesController::class, 'index'])->middleware(['auth']);
-Route::get('/games/create', [GamesController::class, 'create'])->middleware(['auth']);
-*/
+Route::resource('/games', GamesController::class, array('only' => array('index', 'create', 'store', 'edit', 'update', 'destroy') ) )->middleware(['auth']);
+
 Route::resource('/games/{gameName}', SpeedrunVideoController::class, array('only' => array('index', 'create') ) )->middleware(['auth']);
 
 Route::get('/users', [UserController::class, 'index'])->middleware(['auth']);

@@ -65,35 +65,7 @@
 
 
     
-
-
-<script>
-    var count = 0;
-    let categoryButton = document.getElementById("addCategoryButton");
-    categoryButton.onclick = function(){
-        let input = document.getElementById("categoryNameInput")
-        document.getElementById("categories").innerHTML += addNewRow(input.value);
-        input.value = "";
-        count++;
-    };
-
-    function deleteCategory(target){
-        target.parentNode.parentNode.remove();
-    }
-
-    function addNewRow(texto){
-        let newRow = 
-        '<div class="row mb-3">'+
-            '<div class="col-auto">'+
-                '<input type="text" class="form-control" placeholder="Category name" name="categoryName[]" value="'+texto+'">'+
-            '</div>'+
-            '<div class="col-auto">'+
-                '<div class="btn btn-small btn-danger" type="button" onclick="deleteCategory(this)">Delete</div>'+
-            '</div>'+
-        '</div>'
-        return newRow;
-    }
-</script>
+<script type="text/javascript" src="/js/addGameCategory.js"></script>
 
 
 @endsection
