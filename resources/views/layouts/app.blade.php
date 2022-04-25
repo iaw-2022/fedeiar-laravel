@@ -25,7 +25,7 @@
 </head>
 
 <body class="font-sans antialiased">
-    <div class="">
+    <div>
         @include('layouts.navigation')
         <div class="container">
 

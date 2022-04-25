@@ -58,7 +58,7 @@
     </div>
 </div>
 
-@include('components.flash')
+@include('utilities.flash')
 
 <!-- Scripts -->
 <script>

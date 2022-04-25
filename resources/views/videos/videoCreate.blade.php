@@ -9,7 +9,7 @@
 @section('page content')
 
 
-<form action="/games" method="POST">
+<form method="POST" action="/games">
     @csrf
 
     <label class="fs-4 form-label">Select the category of the speedrun</label>
