@@ -15,13 +15,11 @@ return new class extends Migration
     {
         Schema::create('categories', function (Blueprint $table) {
             $table->id();
-            $table->string('game_name');
+            $table->foreignId('game_id')->constrained('games')->onDelete('cascade');
             $table->string('category_name');
             $table->timestamps();
 
-            $table->unique(['game_name', 'category_name']);
-            
-            $table->foreign('game_name')->references('name')->on('games')->onDelete('cascade')->onUpdate('cascade');
+            $table->unique(['game_id', 'category_name']);
         });
     }
 

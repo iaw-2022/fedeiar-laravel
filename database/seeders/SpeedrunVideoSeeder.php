@@ -2,7 +2,10 @@
 
 namespace Database\Seeders;
 
+use App\Models\Category;
+use App\Models\Game;
 use App\Models\SpeedrunVideo;
+use App\Models\User;
 use Illuminate\Database\Console\Seeds\WithoutModelEvents;
 use Illuminate\Database\Seeder;
 
@@ -15,92 +18,106 @@ class SpeedrunVideoSeeder extends Seeder
      */
     public function run()
     {
+        SpeedrunVideo::truncate();
+
+        $game_id = Game::where('game_name', 'Celeste')->first()->id;
         SpeedrunVideo::create(array(
             'link_video' => 'link to video',
             'completion_time_minutes' => '320.5',
-            'username' => 'bousher',
-            'game_name' => 'Celeste',
-            'category_name' => '100%',
+            'user_id' => User::where('name', 'bousher')->first()->id,
+            'game_id' => $game_id,
+            'category_id' => Category::where('game_id', $game_id)->where('category_name', '100%')->first()->id,
         ));
 
+        $game_id = Game::where('game_name', 'Celeste')->first()->id;
         SpeedrunVideo::create(array(
             'link_video' => 'link to video',
             'completion_time_minutes' => '324.5',
-            'username' => 'juan',
-            'game_name' => 'Celeste',
-            'category_name' => '100%',
+            'user_id' => User::where('name', 'juan')->first()->id,
+            'game_id' => $game_id,
+            'category_id' => Category::where('game_id', $game_id)->where('category_name', '100%')->first()->id,
         ));
 
+        $game_id = Game::where('game_name', 'Celeste')->first()->id;
         SpeedrunVideo::create(array(
             'link_video' => 'link to video',
             'completion_time_minutes' => '115.73',
-            'username' => 'juan',
-            'game_name' => 'Celeste',
-            'category_name' => 'any%',
+            'user_id' => User::where('name', 'juan')->first()->id,
+            'game_id' => $game_id,
+            'category_id' => Category::where('game_id', $game_id)->where('category_name', 'any%')->first()->id,
         ));
 
+        $game_id = Game::where('game_name', 'Portal')->first()->id;
         SpeedrunVideo::create(array(
             'link_video' => 'link to video',
             'completion_time_minutes' => '320.5',
-            'username' => 'juan',
-            'game_name' => 'Portal',
-            'category_name' => 'any%',
+            'user_id' => User::where('name', 'juan')->first()->id,
+            'game_id' => $game_id,
+            'category_id' => Category::where('game_id', $game_id)->where('category_name', 'any%')->first()->id,
         ));
 
+       $game_id = Game::where('game_name', 'Portal')->first()->id;
         SpeedrunVideo::create(array(
             'link_video' => 'link to video',
             'completion_time_minutes' => '243.7',
-            'username' => 'juan',
-            'game_name' => 'Portal',
-            'category_name' => 'any%',
+            'user_id' => User::where('name', 'juan')->first()->id,
+            'game_id' => $game_id,
+            'category_id' => Category::where('game_id', $game_id)->where('category_name', 'any%')->first()->id,
         ));
 
+        $game_id = Game::where('game_name', 'Super Mario 64')->first()->id;
         SpeedrunVideo::create(array(
             'link_video' => 'link to video',
             'completion_time_minutes' => '97.4',
-            'username' => 'bousher',
-            'game_name' => 'Super Mario 64',
-            'category_name' => 'any%',
+            'user_id' => User::where('name', 'bousher')->first()->id,
+            'game_id' => $game_id,
+            'category_id' => Category::where('game_id', $game_id)->where('category_name', 'any%')->first()->id,
         ));
 
+        $game_id = Game::where('game_name', 'Super Mario 64')->first()->id;
         SpeedrunVideo::create(array(
             'link_video' => 'link to video',
             'completion_time_minutes' => '101.7',
-            'username' => 'federico',
-            'game_name' => 'Super Mario 64',
-            'category_name' => 'any%',
+            'user_id' => User::where('name', 'federico')->first()->id,
+            'game_id' => $game_id,
+            'category_id' => Category::where('game_id', $game_id)->where('category_name', 'any%')->first()->id,
         ));
 
+        $game_id = Game::where('game_name', 'Super Mario 64')->first()->id;
         SpeedrunVideo::create(array(
             'link_video' => 'link to video',
             'completion_time_minutes' => '500.92',
-            'username' => 'bousher',
-            'game_name' => 'Super Mario 64',
-            'category_name' => '100%',
+            'user_id' => User::where('name', 'bousher')->first()->id,
+            'game_id' => $game_id,
+            'category_id' => Category::where('game_id', $game_id)->where('category_name', '100%')->first()->id,
         ));
 
+        $game_id = Game::where('game_name', 'Super Mario 64')->first()->id;
         SpeedrunVideo::create(array(
             'link_video' => 'link to video',
             'completion_time_minutes' => '525.66',
-            'username' => 'peter',
-            'game_name' => 'Super Mario 64',
-            'category_name' => '100%',
+            'user_id' => User::where('name', 'peter')->first()->id,
+            'game_id' => $game_id,
+            'category_id' => Category::where('game_id', $game_id)->where('category_name', '100%')->first()->id,
         ));
-        
+
+        $game_id = Game::where('game_name', 'Super Mario 64')->first()->id;
         SpeedrunVideo::create(array(
             'link_video' => 'link to video',
             'completion_time_minutes' => '120.32',
-            'username' => 'peter',
-            'game_name' => 'Super Mario 64',
-            'category_name' => 'low%',
+            'user_id' => User::where('name', 'peter')->first()->id,
+            'game_id' => $game_id,
+            'category_id' => Category::where('game_id', $game_id)->where('category_name', 'low%')->first()->id,
         ));
-
+        
+        $game_id = Game::where('game_name', 'Super Mario 64')->first()->id;
         SpeedrunVideo::create(array(
             'link_video' => 'link to video',
             'completion_time_minutes' => '115.99',
-            'username' => 'juan',
-            'game_name' => 'Super Mario 64',
-            'category_name' => 'low%',
+            'user_id' => User::where('name', 'juan')->first()->id,
+            'game_id' => $game_id,
+            'category_id' => Category::where('game_id', $game_id)->where('category_name', 'low%')->first()->id,
         ));
+
     }
 }

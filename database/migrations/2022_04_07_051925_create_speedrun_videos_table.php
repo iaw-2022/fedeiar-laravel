@@ -15,15 +15,23 @@ return new class extends Migration
     {
         Schema::create('speedrun_videos', function (Blueprint $table) {
             $table->id();
+            $table->foreignId('user_id')->constrained('users')->onDelete('cascade');
+            $table->foreignId('game_id')->constrained('games')->onDelete('cascade');
+            $table->foreignId('category_id')->constrained('categories')->onDelete('cascade');
+            
+
             $table->string('link_video');
             $table->float('completion_time_minutes');
-            $table->string('username');
-            $table->string('game_name');
-            $table->string('category_name');
             $table->timestamps();
 
-            $table->foreign('username')->references('name')->on('users');
-            $table->foreign(['game_name', 'category_name'])->references(['game_name', 'category_name'])->on('categories')->onDelete('cascade')->onUpdate('cascade');
+
+
+            //$table->string('username');
+            //$table->string('game_name');
+            //$table->string('category_name');
+
+            //$table->foreign('username')->references('name')->on('users');
+            //$table->foreign(['game_name', 'category_name'])->references(['game_name', 'category_name'])->on('categories')->onDelete('cascade')->onUpdate('cascade');
         });
     }
 

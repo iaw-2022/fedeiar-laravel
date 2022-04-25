@@ -13,4 +13,12 @@ class SpeedrunVideo extends Model
      * @var string $table
      */
     protected $table = 'speedrun_videos';
+
+    public function game(){
+        return $this->belongsTo(Game::class, 'game_id', 'id');
+    }
+
+    public function category(){
+        return $this->belongsTo(Category::class, 'category_id', 'id');
+    }
 }

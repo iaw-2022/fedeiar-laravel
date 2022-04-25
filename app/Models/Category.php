@@ -13,4 +13,12 @@ class Category extends Model
      * @var string $table
      */
     protected $table = 'categories';
+
+    public function game(){
+        return $this->belongsTo(Game::class, 'game_id', 'id');
+    }
+
+    public function speedrunVideos(){
+        return $this->hasMany(SpeedrunVideo::class, 'category_id', 'id');
+    }
 }

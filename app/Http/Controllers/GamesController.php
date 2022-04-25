@@ -40,7 +40,7 @@ class GamesController extends Controller
     public function store(Request $request)
     {
         $request->validate([
-            'gameName' => 'required|unique:games,name',
+            'gameName' => 'required|unique:games,game_name',
             'categoryName' => 'required|array|min:1',
             'categoryName.*' => 'required'
         ],
@@ -48,27 +48,26 @@ class GamesController extends Controller
             'gameName.unique' => 'The game name has already been created.',
             'categoryName.required' => 'Add at least one category.',
             'categoryName.*.required' => 'Category name cannot be empty!',
-            'categoryName.*.unique' => 'The category for this game has already been created.'
         ]
         );
 
         $game = new Game();
         
-        $game->name = $request->get('gameName');
+        $game->game_name = $request->get('gameName');
         $categories = $request->input('categoryName.*');
 
         $game->save();
 
         foreach($categories as $categoryName){
-            if(Category::where('game_name', $game->name)->where('category_name', $categoryName)->first() == null){
+            if($game->categories->where('category_name', $categoryName)->first() == null){
                 $category = new Category();
-                $category->game_name = $request->get('gameName');
+                $category->game_id = $game->id;
                 $category->category_name = $categoryName;
                 $category->save();
+
+                $game->refresh();
             }
         }
-
-        //session()->flash('success', 'Game was added succesfully!');
 
         return redirect('/games')->with('success', 'Game was added succesfully!');
     }
@@ -81,7 +80,7 @@ class GamesController extends Controller
      */
     public function edit($gameName)
     {
-        $categories = Category::where('game_name', $gameName)->get();
+        $categories = Game::where('game_name', $gameName)->first()->categories;
         return view('games.gameEdit', ['gameName' => $gameName, 'categories' => $categories]);
     }
 
@@ -94,9 +93,8 @@ class GamesController extends Controller
      */
     public function update(Request $request, $gameName)
     {
-        
         $request->validate([
-            'gameName' => ['required', Rule::unique('games', 'name')->ignore($gameName, 'name')],
+            'gameName' => ['required', Rule::unique('games', 'game_name')->ignore($gameName, 'game_name')],
             'categoryName' => 'required|array|min:1',
             'categoryName.*' => 'required'
         ],
@@ -104,11 +102,10 @@ class GamesController extends Controller
             'gameName.unique' => 'The game name has already been created.',
             'categoryName.required' => 'Add at least one category.',
             'categoryName.*.required' => 'Category name cannot be empty!',
-            'categoryName.*.unique' => 'The category for this game has already been created.'
         ]
         );
         
-        $oldCategories = Category::where('game_name', $gameName)->get();
+        $oldCategories = Game::where('game_name', $gameName)->first()->categories;
         $newCategories = $request->input('categoryName.*');
 
         foreach($oldCategories as $oldCategory){
@@ -117,19 +114,21 @@ class GamesController extends Controller
             }
         }
 
-        $game = Game::where('name', $gameName)->first();
+        $game = Game::where('game_name', $gameName)->first();
 
-        $game->name = $request->get('gameName');
+        $game->game_name = $request->get('gameName');
 
         $game->update();
 
         foreach($newCategories as $categoryName){
             if(!$oldCategories->contains('category_name', $categoryName)){
-                if(Category::where('game_name', $game->name)->where('category_name', $categoryName)->first() == null){
+                if(Category::where('game_id', $game->id)->where('category_name', $categoryName)->first() == null){
                     $category = new Category();
-                    $category->game_name = $request->get('gameName');
+                    $category->game_id = $game->id;
                     $category->category_name = $categoryName;
                     $category->save();
+
+                    $game->refresh();
                 }
             }
         }
@@ -145,7 +144,7 @@ class GamesController extends Controller
      */
     public function destroy($gameName)
     {
-        $game = Game::where('name', $gameName)->first();
+        $game = Game::where('game_name', $gameName)->first();
         $game->delete();
         return redirect('/games')->with('success', 'Game was deleted succesfully!');
     }

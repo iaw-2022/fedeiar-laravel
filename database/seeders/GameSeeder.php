@@ -15,28 +15,30 @@ class GameSeeder extends Seeder
      */
     public function run()
     {
+        Game::truncate();
+
         Game::create(array(
-            'name' => 'Super Mario Bros.'
+            'game_name' => 'Super Mario Bros.'
         ));
 
         Game::create(array(
-            'name' => 'Celeste'
+            'game_name' => 'Celeste'
         ));
 
         Game::create(array(
-            'name' => 'Portal'
+            'game_name' => 'Portal'
         ));
 
         Game::create(array(
-            'name' => 'Hollow Knight'
+            'game_name' => 'Hollow Knight'
         ));
 
         Game::create(array(
-            'name' => 'Super Mario 64'
+            'game_name' => 'Super Mario 64'
         ));
 
         Game::create(array(
-            'name' => 'The Legend of Zelda: Ocarina of Time'
+            'game_name' => 'The Legend of Zelda: Ocarina of Time'
         ));
     }
 }

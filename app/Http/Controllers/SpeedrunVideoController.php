@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Models\Category;
+use App\Models\Game;
 use App\Models\GameCategoryRelation;
 use Illuminate\Http\Request;
 use App\Models\SpeedrunVideo;
@@ -15,6 +16,10 @@ class SpeedrunVideoController extends Controller
      * @return \Illuminate\Http\Response
      */
     public function index($gameName){
+        if(Game::where('name', $gameName)->first() == null){
+            abort(404);
+        }
+        dd(SpeedrunVideo::where('game_name', $gameName)->get());
         $videos = SpeedrunVideo::where('game_name', $gameName)->get();
         $categories = Category::where('game_name', $gameName)->get();
         

@@ -13,4 +13,12 @@ class Game extends Model
      * @var string $table
      */
     protected $table = 'games';
+
+    public function categories(){
+        return $this->hasMany(Category::class, 'game_id', 'id');
+    }
+
+    public function speedrunVideos(){
+        return $this->hasMany(SpeedrunVideo::class, 'game_id', 'id');
+    }
 }
