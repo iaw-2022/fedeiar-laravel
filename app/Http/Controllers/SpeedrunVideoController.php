@@ -16,12 +16,12 @@ class SpeedrunVideoController extends Controller
      * @return \Illuminate\Http\Response
      */
     public function index($gameName){
-        if(Game::where('name', $gameName)->first() == null){
+        $game = Game::where('game_name', $gameName)->first();
+        if($game == null){
             abort(404);
         }
-        dd(SpeedrunVideo::where('game_name', $gameName)->get());
-        $videos = SpeedrunVideo::where('game_name', $gameName)->get();
-        $categories = Category::where('game_name', $gameName)->get();
+        $categories = $game->categories;
+        $videos = $game->videos;
         
         return view('videos.videoIndex', ['gameName' => $gameName, 'categories' => $categories, 'videos' => $videos]);
     }
@@ -31,11 +31,14 @@ class SpeedrunVideoController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function create($gameName)
-    {
-        $videos = SpeedrunVideo::where('game_name', $gameName)->get();
-        $categories = Category::where('game_name', $gameName)->get();
-
+    public function create($gameName){
+        $game = Game::where('game_name', $gameName)->first();
+        if($game == null){
+            abort(404);
+        }
+        $categories = $game->categories;
+        $videos = $game->videos;
+        
         return view('videos.videoCreate', ['gameName' => $gameName, 'categories' => $categories]);
     }
 

@@ -29,9 +29,9 @@
         @foreach($videos as $video)
         <tr>
             <td>{{ $video->id }}</td>
-            <td>{{ $video->username }}</td>
-            <td>{{ $video->game_name }}</td>
-            <td>{{ $video->category_name }}</td>
+            <td>{{ $video->user->name }}</td>
+            <td>{{ $video->game->game_name }}</td>
+            <td>{{ $video->category->category_name }}</td>
             <td>{{ $video->completion_time_minutes }}</td>
             <td>{{ $video->link_video }}</td>
         </tr>

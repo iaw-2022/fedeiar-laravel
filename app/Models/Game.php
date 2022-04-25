@@ -18,7 +18,7 @@ class Game extends Model
         return $this->hasMany(Category::class, 'game_id', 'id');
     }
 
-    public function speedrunVideos(){
+    public function videos(){
         return $this->hasMany(SpeedrunVideo::class, 'game_id', 'id');
     }
 }

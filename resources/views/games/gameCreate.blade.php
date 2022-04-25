@@ -69,7 +69,8 @@
     let addCategoryButton = document.getElementById("addCategoryButton");
     addCategoryButton.onclick = function(){
         let input = document.getElementById("categoryNameInput")
-        document.getElementById("categories").innerHTML += addNewRow(input.value);
+        //document.getElementById("categories").innerHTML += addNewRow(input.value);
+        $("#categories").append(addNewRow(input.value));
         input.value = "";
     };
 
@@ -84,7 +85,7 @@
                 '<input type="text" class="form-control" placeholder="Category name" name="categoryName[]" value="'+texto+'" required>'+
             '</div>'+
             '<div class="col-auto">'+
-                '<div class="btn btn-small btn-danger" type="button" onclick="deleteCategory(this)">Delete</div>'+
+                '<button class="btn btn-small btn-danger" type="button" onclick="deleteCategory(this)">Delete</button>'+
             '</div>'+
         '</div>'
         return newRow;
