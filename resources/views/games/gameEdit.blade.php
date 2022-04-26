@@ -67,7 +67,7 @@
     <hr class="mb-3 mt-4">
     </hr>
 
-    @include('utilities.submitCancel-button', ['submitButtonName' => 'Update Game'])
+    @include('utilities.submitCancel-buttons', ['submitButtonName' => 'Submit Game', 'cancelPath' => '/games'])
 </form>
 
 

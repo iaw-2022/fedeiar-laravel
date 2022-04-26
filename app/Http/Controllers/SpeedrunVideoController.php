@@ -7,6 +7,7 @@ use App\Models\Game;
 use App\Models\GameCategoryRelation;
 use Illuminate\Http\Request;
 use App\Models\SpeedrunVideo;
+use Illuminate\Validation\Rule;
 
 class SpeedrunVideoController extends Controller
 {
@@ -37,7 +38,6 @@ class SpeedrunVideoController extends Controller
             abort(404);
         }
         $categories = $game->categories;
-        $videos = $game->videos;
         
         return view('videos.videoCreate', ['gameName' => $gameName, 'categories' => $categories]);
     }
@@ -50,13 +50,25 @@ class SpeedrunVideoController extends Controller
      */
     public function store(Request $request, $gameName)
     {
+        $request->validate([
+            'category_id' => ['required', Rule::exists('categories', 'id')],
+            'time' => 'required|numeric',
+            'link' => 'required'
+        ]);
 
         $speedrunVideo = new SpeedrunVideo();
+        $category = Category::find($request->category_id);
 
-        $speedrunVideo->username = auth()->user()->name;
-        //$speedrunVideo->game_name = 
+        $speedrunVideo->user_id = auth()->user()->id;
+        $speedrunVideo->game_id = $category->game_id;
+        $speedrunVideo->category_id = $category->id;
+        $speedrunVideo->link_video = $request->link;
+        $speedrunVideo->completion_time_minutes = $request->time;
 
+        $speedrunVideo->save();
 
+        $gameName = $category->game->game_name;
+        return redirect("/games/".$gameName)->with('success', 'Video was added successfully!');
     }
 
     /**
@@ -76,9 +88,16 @@ class SpeedrunVideoController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function edit($id)
-    {
-        //
+    public function edit($gameName, $videoId){
+        $game = Game::where('game_name', $gameName)->first();
+        if($game == null){
+            abort(404);
+        }
+        $categories = $game->categories;
+        $video = SpeedrunVideo::find($videoId);
+
+        
+        return view('videos.videoEdit', ['gameName' => $gameName, 'video' => $video, 'categories' => $categories]);
     }
 
     /**
@@ -88,9 +107,24 @@ class SpeedrunVideoController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, $id)
-    {
-        //
+    public function update(Request $request, $gameName, $id){
+        $request->validate([
+            'category_id' => ['required', Rule::exists('categories', 'id')],
+            'time' => 'required|numeric',
+            'link' => 'required'
+        ]);
+
+        $speedrunVideo = SpeedrunVideo::find($id);
+        $category = Category::find($request->category_id);
+
+        $speedrunVideo->category_id = $category->id;
+        $speedrunVideo->link_video = $request->link;
+        $speedrunVideo->completion_time_minutes = $request->time;
+
+        $speedrunVideo->update();
+
+        $gameName = $category->game->game_name;
+        return redirect("/games/".$gameName)->with('success', 'Video was updated successfully!');
     }
 
     /**
@@ -99,8 +133,10 @@ class SpeedrunVideoController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function destroy($id)
+    public function destroy($gameName, $id)
     {
-        //
+        SpeedrunVideo::find($id)->delete();
+
+        return redirect("/games/".$gameName)->with('success', 'Video was deleted successfully!');
     }
 }

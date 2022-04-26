@@ -45,7 +45,7 @@ class GamesController extends Controller
             'categoryName.*' => 'required'
         ],
         [
-            'gameName.unique' => 'The game name has already been created.',
+            'gameName.unique' => 'The game with that name has already been created.',
             'categoryName.required' => 'Add at least one category.',
             'categoryName.*.required' => 'Category name cannot be empty!',
         ]
@@ -69,7 +69,7 @@ class GamesController extends Controller
             }
         }
 
-        return redirect('/games')->with('success', 'Game was added succesfully!');
+        return redirect('/games')->with('success', 'Game was added successfully!');
     }
 
     /**
@@ -133,7 +133,7 @@ class GamesController extends Controller
             }
         }
 
-        return redirect('/games')->with('success', 'Game was updated succesfully!');
+        return redirect('/games')->with('success', 'Game was updated successfully!');
     }
 
     /**
@@ -146,6 +146,6 @@ class GamesController extends Controller
     {
         $game = Game::where('game_name', $gameName)->first();
         $game->delete();
-        return redirect('/games')->with('success', 'Game was deleted succesfully!');
+        return redirect('/games')->with('success', 'Game was deleted successfully!');
     }
 }

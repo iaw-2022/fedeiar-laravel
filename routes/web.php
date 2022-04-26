@@ -28,6 +28,10 @@ require __DIR__.'/auth.php';
 
 Route::resource('/games', GamesController::class, array('only' => array('index', 'create', 'store', 'edit', 'update', 'destroy') ) )->middleware(['auth']);
 
-Route::resource('/games/{gameName}', SpeedrunVideoController::class, array('only' => array('index', 'create') ) )->middleware(['auth']);
+Route::get('/games/{gameName}/{id}/edit', [SpeedrunVideoController::class, 'edit'])->middleware(['auth']);
+Route::patch('/games/{gameName}/{id}', [SpeedrunVideoController::class, 'update'])->middleware(['auth']);
+Route::delete('/games/{gameName}/{id}', [SpeedrunVideoController::class, 'destroy'])->middleware(['auth']);
+// Algunos métodos van en los Routes de arriba y no en el resource que viene a continuación ya que en Route::resource laravel asigna 2 veces {gameName} y genera un error.
+Route::resource('/games/{gameName}', SpeedrunVideoController::class, array('only' => array('index', 'create', 'store') ) )->middleware(['auth']);
 
 Route::get('/users', [UserController::class, 'index'])->middleware(['auth']);

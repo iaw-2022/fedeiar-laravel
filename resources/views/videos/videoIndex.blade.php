@@ -23,6 +23,7 @@
             <th scope="col">Category</th>
             <th scope="col">Completion time (in minutes)</th>
             <th scope="col">link to video</th>
+            <th>Actions</th>
         </tr>
     </thead>
     <tbody>
@@ -34,11 +35,41 @@
             <td>{{ $video->category->category_name }}</td>
             <td>{{ $video->completion_time_minutes }}</td>
             <td>{{ $video->link_video }}</td>
+            <td>
+                <a class="btn btn-info" href="/games/{{$gameName}}/{{$video->id}}/edit">Edit</a>
+                <a class="btn btn-danger" data-bs-toggle="modal" data-bs-target="#exampleModal" data-video="{{$video->id}}">Delete</a>
+            </td>
         </tr>
         @endforeach
     </tbody>
 </table>
 
+<!-- Modal -->
+<div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="exampleModalLabel">
+                    <!-- Text title from the javascript below -->
+                </h5>
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+            <div class="modal-body">
+                <!-- Text body from the javascript below -->
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+                <form id="deleteForm" method="POST" action="">
+                    @csrf
+                    @method('DELETE')
+                    <button type="submit" class="btn btn-primary">Confirm</button>
+                </form>
+            </div>
+        </div>
+    </div>
+</div>
+
+@include('utilities.flash')
 
 <!-- Scripts -->
 <script>
@@ -72,6 +103,18 @@
 
     } );
 } );
+</script>
+
+<script>
+    $('#exampleModal').on('show.bs.modal', function(event) {
+        var button = $(event.relatedTarget); // Button that triggered the modal
+        var videoId = button.data('video'); // Extract info from data-* attributes
+        
+        var modal = $(this)
+        modal.find('.modal-title').text('Delete run');
+        modal.find('.modal-body').text('Are you sure you want to delete the run?');
+        $('#deleteForm').attr('action', '/games/<?php echo $gameName; ?>'+'/'+videoId);
+    })
 </script>
 
 @endsection

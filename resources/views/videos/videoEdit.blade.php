@@ -9,26 +9,32 @@
 @section('page content')
 
 
-<form method="POST" action="/games/{{$gameName}}">
+<form method="POST" action="/games/{{$gameName}}/{{$video->id}}">
     @csrf
+    @method('PATCH')
 
     <label class="fs-4 form-label">Select the category of the speedrun</label>
     <select name="category_id" class="form-select mb-3" aria-label="Default select example">
         <?php
         foreach ($categories as $category) {
-            echo "<option value='$category->id'> $category->category_name </option>";
+            if($category->id == $video->id){
+                echo "<option selected value='$category->id'> $category->category_name </option>";
+            }
+            else{
+                echo "<option value='$category->id'> $category->category_name </option>";
+            }
         }
         ?>
     </select>
 
     <div class="mb-3">
         <label class="fs-4 form-label">Enter the completion time of the game (a real number representing minutes)</label>
-        <input name="time" type="number"  step="any" class="form-control" required>
+        <input name="time" type="number" step="any" value="{{$video->completion_time_minutes}}" class="form-control" required>
     </div>
 
     <div>
         <label class="fs-4 form-label">Enter the URL link to the video</label>
-        <input name="link" type="text" name="gameName" placeholder="Video link" class="form-control" required>
+        <input name="link" type="text" name="gameName" value="{{$video->link_video}}" placeholder="Video link" class="form-control" required>
     </div>
 
 
