@@ -59,6 +59,7 @@ class GamesController extends Controller
         $game->save();
 
         foreach($categories as $categoryName){
+            // en lugar de ir a la bd, usar el arreglo $categories.
             if($game->categories->where('category_name', $categoryName)->first() == null){
                 $category = new Category();
                 $category->game_id = $game->id;
@@ -122,6 +123,7 @@ class GamesController extends Controller
 
         foreach($newCategories as $categoryName){
             if(!$oldCategories->contains('category_name', $categoryName)){
+                // en lugar de ir a la bd, usar el arreglo $categories.
                 if(Category::where('game_id', $game->id)->where('category_name', $categoryName)->first() == null){
                     $category = new Category();
                     $category->game_id = $game->id;

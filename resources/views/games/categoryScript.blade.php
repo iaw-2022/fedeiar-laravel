@@ -2,7 +2,6 @@
     let addCategoryButton = document.getElementById("addCategoryButton");
     addCategoryButton.onclick = function(){
         let input = document.getElementById("categoryNameInput")
-        //document.getElementById("categories").innerHTML += addNewRow(input.value);
         $("#categories").append(addNewRow(input.value));
         input.value = "";
     };
