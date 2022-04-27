@@ -17,24 +17,32 @@
 <table id="videosTable" class="table table-bordered">
     <thead>
         <tr>
-            <th scope="col">Position</th>
+            <th scope="col">Id</th>
             <th scope="col">User</th>
             <th scope="col">Game Name</th>
             <th scope="col">Category</th>
-            <th scope="col">Completion time (in minutes)</th>
+            <th scope="col">Completion time</th>
             <th scope="col">link to video</th>
             <th>Actions</th>
         </tr>
     </thead>
     <tbody>
+        <?php 
+            use App\Http\Controllers\SpeedrunVideoController;
+            $position = 0;
+        ?>
         @foreach($videos as $video)
+        <?php 
+            $arrayTime = SpeedrunVideoController::secondsToTime($video->completion_time_seconds);
+            $position++;
+        ?>
         <tr>
             <td>{{ $video->id }}</td>
             <td>{{ $video->user->name }}</td>
             <td>{{ $video->game->game_name }}</td>
             <td>{{ $video->category->category_name }}</td>
-            <td>{{ $video->completion_time_minutes }}</td>
-            <td>{{ $video->link_video }}</td>
+            <td data-order="{{$video->completion_time_seconds}}">{{ $arrayTime['hours'].' hs, '.$arrayTime['minutes'].' m, '.$arrayTime['seconds'].' s'}}</td>
+            <td><a href="{{$video->link_video}}" class="text-primary">{{ substr($video->link_video, 0, 20).'...' }}</a></td>
             <td>
                 <a class="btn btn-info" href="/games/{{$gameName}}/{{$video->id}}/edit">Edit</a>
                 <a class="btn btn-danger" data-bs-toggle="modal" data-bs-target="#exampleModal" data-video="{{$video->id}}">Delete</a>
@@ -55,33 +63,32 @@
     let allCategories = <?php echo json_encode($categories); ?>;
     
     $(document).ready(function() {
-    $('#videosTable').DataTable( {
+        $('#videosTable').DataTable({
 
-        "order":[[4, "asc"]],
+            "order":[[4, "asc"]],
 
-        initComplete: function () {
-            this.api().columns(3).every( function () {
-                var column = this;
-                var select = $('<select><option value="">Show All</option></select>')
-                    .appendTo( '#categoryFilter' )
-                    .on( 'change', function () {
-                        var val = $.fn.dataTable.util.escapeRegex(
-                            $(this).val()
-                        );
-
-                        column
-                            .search( val ? '^'+val+'$' : '', true, false )
-                            .draw();
-                    } );
- 
-                allCategories.forEach( function ( categoryName ) {
-                    select.append( '<option value="'+categoryName.category_name+'">'+categoryName.category_name+'</option>' )
+            initComplete: function(){
+                this.api().columns(3).every( function(){
+                    var column = this;
+                    var select = $('<select><option value="">Show All</option></select>')
+                        .appendTo('#categoryFilter')
+                        .on('change', function(){
+                            var val = $.fn.dataTable.util.escapeRegex(
+                                $(this).val()
+                            );
+                            column
+                                .search( val ? '^'+val+'$' : '', true, false )
+                                .draw();
+                        } );
+    
+                    allCategories.forEach(function(categoryName){
+                        select.append('<option value="'+categoryName.category_name+'">'+categoryName.category_name+'</option>')
+                    });
                 } );
-            } );
-        }
+            }
 
+        });
     } );
-} );
 </script>
 
 <script>

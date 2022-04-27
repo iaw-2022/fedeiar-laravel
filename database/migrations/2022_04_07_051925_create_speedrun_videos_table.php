@@ -21,7 +21,7 @@ return new class extends Migration
             
 
             $table->string('link_video');
-            $table->float('completion_time_minutes');
+            $table->integer('completion_time_seconds');
             $table->timestamps();
 
 

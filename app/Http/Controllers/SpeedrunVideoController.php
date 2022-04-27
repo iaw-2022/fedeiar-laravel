@@ -21,10 +21,19 @@ class SpeedrunVideoController extends Controller
         if($game == null){
             abort(404);
         }
+
         $categories = $game->categories;
         $videos = $game->videos;
-        
+
         return view('videos.videoIndex', ['gameName' => $gameName, 'categories' => $categories, 'videos' => $videos]);
+    }
+
+    public static function secondsToTime($totalSeconds){
+        $hours = floor($totalSeconds / 3600);
+        $minutes = floor(($totalSeconds / 60) % 60);
+        $seconds = $totalSeconds % 60;
+
+        return ['hours' => $hours, 'minutes' => $minutes, 'seconds' => $seconds];
     }
 
     /**
@@ -52,8 +61,10 @@ class SpeedrunVideoController extends Controller
     {
         $request->validate([
             'category_id' => ['required', Rule::exists('categories', 'id')],
-            'time' => 'required|numeric',
-            'link' => 'required'
+            'hours' => 'required|integer',
+            'minutes' => 'required|integer|between:1,59',
+            'seconds' => 'required|integer|between:1,59',
+            'link' => 'required|url'
         ]);
 
         $speedrunVideo = new SpeedrunVideo();
@@ -63,12 +74,16 @@ class SpeedrunVideoController extends Controller
         $speedrunVideo->game_id = $category->game_id;
         $speedrunVideo->category_id = $category->id;
         $speedrunVideo->link_video = $request->link;
-        $speedrunVideo->completion_time_minutes = $request->time;
+        $speedrunVideo->completion_time_seconds = $this->timeToSeconds($request->hours, $request->minutes, $request->seconds);
 
         $speedrunVideo->save();
 
         $gameName = $category->game->game_name;
         return redirect("/games/".$gameName)->with('success', 'Video was added successfully!');
+    }
+
+    private function timeToSeconds($hours, $minutes, $seconds){
+        return $hours * 3600 + $minutes * 60 + $seconds;
     }
 
     /**
@@ -95,9 +110,9 @@ class SpeedrunVideoController extends Controller
         }
         $categories = $game->categories;
         $video = SpeedrunVideo::find($videoId);
-
+        $arrayTime = SpeedrunVideoController::secondsToTime($video->completion_time_seconds);
         
-        return view('videos.videoEdit', ['gameName' => $gameName, 'video' => $video, 'categories' => $categories]);
+        return view('videos.videoEdit', ['gameName' => $gameName, 'video' => $video, 'categories' => $categories, 'arrayTime' => $arrayTime]);
     }
 
     /**
@@ -110,8 +125,10 @@ class SpeedrunVideoController extends Controller
     public function update(Request $request, $gameName, $id){
         $request->validate([
             'category_id' => ['required', Rule::exists('categories', 'id')],
-            'time' => 'required|numeric',
-            'link' => 'required'
+            'hours' => 'required|integer',
+            'minutes' => 'required|integer|between:1,59',
+            'seconds' => 'required|integer|between:1,59',
+            'link' => 'required|url'
         ]);
 
         $speedrunVideo = SpeedrunVideo::find($id);
@@ -119,7 +136,7 @@ class SpeedrunVideoController extends Controller
 
         $speedrunVideo->category_id = $category->id;
         $speedrunVideo->link_video = $request->link;
-        $speedrunVideo->completion_time_minutes = $request->time;
+        $speedrunVideo->completion_time_seconds = $this->timeToSeconds($request->hours, $request->minutes, $request->seconds);
 
         $speedrunVideo->update();
 

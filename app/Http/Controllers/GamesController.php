@@ -57,20 +57,18 @@ class GamesController extends Controller
         $categories = $request->input('categoryName.*');
 
         $game->save();
-
+        $savedCategories = [];
         foreach($categories as $categoryName){
-            // en lugar de ir a la bd, usar el arreglo $categories.
-            if($game->categories->where('category_name', $categoryName)->first() == null){
+            if(!in_array($categoryName, $savedCategories)){
+                array_push($savedCategories, $categoryName);
                 $category = new Category();
                 $category->game_id = $game->id;
                 $category->category_name = $categoryName;
                 $category->save();
-
-                $game->refresh();
             }
         }
 
-        return redirect('/games')->with('success', 'Game was added successfully!');
+        return redirect('/games')->with('success', $game->game_name.' was added successfully!');
     }
 
     /**
@@ -79,8 +77,7 @@ class GamesController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function edit($gameName)
-    {
+    public function edit($gameName){
         $categories = Game::where('game_name', $gameName)->first()->categories;
         return view('games.gameEdit', ['gameName' => $gameName, 'categories' => $categories]);
     }
@@ -92,8 +89,7 @@ class GamesController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, $gameName)
-    {
+    public function update(Request $request, $gameName){
         $request->validate([
             'gameName' => ['required', Rule::unique('games', 'game_name')->ignore($gameName, 'game_name')],
             'categoryName' => 'required|array|min:1',
@@ -120,11 +116,11 @@ class GamesController extends Controller
         $game->game_name = $request->get('gameName');
 
         $game->update();
-
+        $savedCategories = [];
         foreach($newCategories as $categoryName){
             if(!$oldCategories->contains('category_name', $categoryName)){
-                // en lugar de ir a la bd, usar el arreglo $categories.
-                if(Category::where('game_id', $game->id)->where('category_name', $categoryName)->first() == null){
+                if(!in_array($categoryName, $savedCategories)){
+                    array_push($savedCategories, $categoryName);
                     $category = new Category();
                     $category->game_id = $game->id;
                     $category->category_name = $categoryName;
@@ -135,7 +131,7 @@ class GamesController extends Controller
             }
         }
 
-        return redirect('/games')->with('success', 'Game was updated successfully!');
+        return redirect('/games')->with('success', $gameName.' was updated successfully!');
     }
 
     /**
