@@ -14,7 +14,7 @@
     @method('PATCH')
 
     <label class="fs-4 form-label">Select the category of the speedrun</label>
-    <select name="category_id" class="form-select mb-3" aria-label="Default select example">
+    <select name="category_id" class="form-select mb-3 w-25" aria-label="Default select example">
         <?php
         foreach ($categories as $category) {
             if($category->id == $video->id){
@@ -57,7 +57,7 @@
 
     <div>
         <label class="fs-4 form-label">Enter the URL link to the video</label>
-        <input name="link" type="url" name="gameName" value="{{$video->link_video}}" placeholder="Video link" class="form-control" required>
+        <input name="link" type="url" name="gameName" value="{{$video->link_video}}" class="form-control w-50" placeholder="Video link" required>
         @error('link')
             <div class="invalid-feedback d-block" role="alert">
                 {{ $message }}

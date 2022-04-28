@@ -51,10 +51,9 @@
     </div>
 
 
-
     <div>
         <label class="fs-4 form-label">Enter the URL link to the video</label>
-        <input name="link" type="url" name="gameName" placeholder="Video link" class="form-control w-50" value="{{ old('link') }}" required>
+        <input name="link" type="url" name="gameName" value="{{ old('link') }}" class="form-control w-50" placeholder="Video link" required>
         @error('link')
             <div class="invalid-feedback d-block" role="alert">
                 {{ $message }}
