@@ -1,6 +1,6 @@
 <?php
 
-use App\Http\Controllers\GamesController;
+use App\Http\Controllers\GameController;
 use App\Http\Controllers\SpeedrunVideoController;
 use App\Http\Controllers\UserController;
 use Illuminate\Support\Facades\Route;
@@ -26,7 +26,7 @@ Route::get('/', function () {
 
 require __DIR__.'/auth.php';
 
-Route::resource('/games', GamesController::class, array('only' => array('index', 'create', 'store', 'edit', 'update', 'destroy') ) )->middleware(['auth']);
+Route::resource('/games', GameController::class, array('only' => array('index', 'create', 'store', 'edit', 'update', 'destroy') ) )->middleware(['auth']);
 
 Route::get('/games/{gameName}/{id}/edit', [SpeedrunVideoController::class, 'edit'])->middleware(['auth']);
 Route::patch('/games/{gameName}/{id}', [SpeedrunVideoController::class, 'update'])->middleware(['auth']);

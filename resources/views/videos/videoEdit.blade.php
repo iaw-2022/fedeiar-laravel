@@ -17,7 +17,7 @@
     <select name="category_id" class="form-select mb-3 w-25" aria-label="Default select example">
         <?php
         foreach ($categories as $category) {
-            if($category->id == $video->id){
+            if($category->id == $video->category_id){
                 echo "<option selected value='$category->id'> $category->category_name </option>";
             }
             else{
@@ -69,7 +69,7 @@
     <hr class="mb-3 mt-4">
     </hr>
 
-    @include('utilities.submitCancel-buttons', ['submitButtonName' => 'Submit Video', 'cancelPath' => '/games/'.$gameName])
+    @include('utilities.submitCancel-buttons', ['submitButtonName' => 'Update Run', 'cancelPath' => '/games/'.$gameName])
 </form>
 
 

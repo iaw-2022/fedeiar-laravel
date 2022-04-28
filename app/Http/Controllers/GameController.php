@@ -8,7 +8,7 @@ use App\Models\SpeedrunVideo;
 use Illuminate\Http\Request;
 use Illuminate\Validation\Rule;
 
-class GamesController extends Controller
+class GameController extends Controller
 {
     /**
      * Display a listing of the resource.
@@ -37,8 +37,7 @@ class GamesController extends Controller
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
-    public function store(Request $request)
-    {
+    public function store(Request $request){
         $request->validate([
             'gameName' => 'required|unique:games,game_name',
             'categoryName' => 'required|array|min:1',
@@ -57,6 +56,7 @@ class GamesController extends Controller
         $categories = $request->input('categoryName.*');
 
         $game->save();
+        
         $savedCategories = [];
         foreach($categories as $categoryName){
             if(!in_array($categoryName, $savedCategories)){
@@ -116,6 +116,7 @@ class GamesController extends Controller
         $game->game_name = $request->get('gameName');
 
         $game->update();
+
         $savedCategories = [];
         foreach($newCategories as $categoryName){
             if(!$oldCategories->contains('category_name', $categoryName)){
@@ -125,8 +126,6 @@ class GamesController extends Controller
                     $category->game_id = $game->id;
                     $category->category_name = $categoryName;
                     $category->save();
-
-                    $game->refresh();
                 }
             }
         }
@@ -140,8 +139,7 @@ class GamesController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function destroy($gameName)
-    {
+    public function destroy($gameName){
         $game = Game::where('game_name', $gameName)->first();
         $game->delete();
         return redirect('/games')->with('success', 'Game was deleted successfully!');
