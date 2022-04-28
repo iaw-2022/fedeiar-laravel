@@ -22,7 +22,7 @@
         @foreach($games as $game)
         <tr>
             <td>{{ $game->id }}</td>
-            <td> <a href='/games/{{ $game->game_name }}' class="text-primary"><u>{{ $game->game_name }}</u></a></td>
+            <td><a href='/games/{{ $game->game_name }}' class="text-primary"><u>{{ $game->game_name }}</u></a></td>
             <td>
                 <a class="btn btn-info" href="games/{{$game->game_name}}/edit">Edit</a>
                 <a class="btn btn-danger" data-bs-toggle="modal" data-bs-target="#exampleModal" data-game="{{$game->game_name}}">Delete</a>
