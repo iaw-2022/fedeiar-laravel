@@ -73,5 +73,15 @@ class CategorySeeder extends Seeder {
             'category_name' => '100%'
         ));
 
+        Category::create(array(
+            'game_id' => Game::where('game_name', 'The Legend of Zelda: Ocarina of Time')->first()->id,
+            'category_name' => 'any%'
+        ));
+
+        Category::create(array(
+            'game_id' => Game::where('game_name', 'The Legend of Zelda: Ocarina of Time')->first()->id,
+            'category_name' => '100%'
+        ));
+
     }
 }
