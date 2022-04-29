@@ -25,7 +25,7 @@
             <td><a href='/games/{{ $game->game_name }}' class="text-primary"><u>{{ $game->game_name }}</u></a></td>
             <td>
                 <a class="btn btn-info" href="games/{{$game->game_name}}/edit">Edit</a>
-                <a class="btn btn-danger" data-bs-toggle="modal" data-bs-target="#exampleModal" data-game="{{$game->game_name}}">Delete</a>
+                <a class="btn btn-danger" data-bs-toggle="modal" data-bs-target="#deleteModal" data-game="{{$game->game_name}}">Delete</a>
             </td>
         </tr>
         @endforeach
@@ -47,7 +47,7 @@
 </script>
 
 <script>
-    $('#exampleModal').on('show.bs.modal', function(event) {
+    $('#deleteModal').on('show.bs.modal', function(event) {
         var button = $(event.relatedTarget); // Button that triggered the modal
         var gameName = button.data('game'); // Extract info from data-* attributes
 

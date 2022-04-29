@@ -57,13 +57,13 @@ class SpeedrunVideoController extends Controller
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
-    public function store(Request $request, $gameName)
-    {
+    public function store(Request $request, $gameName){
+
         $request->validate([
             'category_id' => ['required', Rule::exists('categories', 'id')],
-            'hours' => 'required|integer',
-            'minutes' => 'required|integer|between:1,59',
-            'seconds' => 'required|integer|between:1,59',
+            'hours' => 'required|integer|between:0,999',
+            'minutes' => 'required|integer|between:0,59',
+            'seconds' => 'required|integer|between:0,59',
             'link' => 'required|url'
         ]);
 
@@ -92,8 +92,7 @@ class SpeedrunVideoController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function showVideos($id)
-    {
+    public function showVideos($id){
        
     }
 
@@ -125,9 +124,9 @@ class SpeedrunVideoController extends Controller
     public function update(Request $request, $gameName, $id){
         $request->validate([
             'category_id' => ['required', Rule::exists('categories', 'id')],
-            'hours' => 'required|integer',
-            'minutes' => 'required|integer|between:1,59',
-            'seconds' => 'required|integer|between:1,59',
+            'hours' => 'required|integer|between:0,999',
+            'minutes' => 'required|integer|between:0,59',
+            'seconds' => 'required|integer|between:0,59',
             'link' => 'required|url'
         ]);
 
@@ -140,7 +139,6 @@ class SpeedrunVideoController extends Controller
 
         $speedrunVideo->update();
 
-        $gameName = $category->game->game_name;
         return redirect("/games/".$gameName)->with('success', 'Video was updated successfully!');
     }
 
@@ -150,10 +148,8 @@ class SpeedrunVideoController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function destroy($gameName, $id)
-    {
+    public function destroy($gameName, $id){
         SpeedrunVideo::find($id)->delete();
-
         return redirect("/games/".$gameName)->with('success', 'Video was deleted successfully!');
     }
 }

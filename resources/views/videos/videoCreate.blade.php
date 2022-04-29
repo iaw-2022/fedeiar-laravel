@@ -26,18 +26,22 @@
     <label class="fs-4 form-label">Enter the completion time of the run</label>
     <div class="row mb-3 w-25">
         <div class="col">
-            <label class="fs-5 form-label">Hours</label>
+            <label class="mb-2">Hours</label>
             <input name="hours" type="number" class="form-control" placeholder="Hs" value="{{ old('hours') }}" required>
         </div>
         <div class="col">
-            <label class="fs-5 form-label">Minutes</label>
+            <label class="mb-2">Minutes</label>
             <input name="minutes" type="number" class="form-control" placeholder="Min" value="{{ old('minutes') }}" required>
         </div>
         <div class="col">
-            <label class="fs-5 form-label">Seconds</label>
+            <label class="mb-2">Seconds</label>
             <input name="seconds" type="number" class="form-control" placeholder="Sec" value="{{ old('seconds') }}" required>
         </div>
-
+        @error('hours')
+            <div class="invalid-feedback d-block" role="alert">
+                {{ $message }}
+            </div>
+        @enderror
         @error('minutes')
             <div class="invalid-feedback d-block" role="alert">
                 {{ $message }}

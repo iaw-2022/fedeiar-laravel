@@ -27,15 +27,9 @@
         </tr>
     </thead>
     <tbody>
-        <?php 
-            use App\Http\Controllers\SpeedrunVideoController;
-            $position = 0;
-        ?>
+        <?php use App\Http\Controllers\SpeedrunVideoController; ?>
         @foreach($videos as $video)
-        <?php 
-            $arrayTime = SpeedrunVideoController::secondsToTime($video->completion_time_seconds);
-            $position++;
-        ?>
+        <?php $arrayTime = SpeedrunVideoController::secondsToTime($video->completion_time_seconds); ?>
         <tr>
             <td>{{ $video->id }}</td>
             <td>{{ $video->user->name }}</td>
@@ -45,7 +39,7 @@
             <td><a href="{{$video->link_video}}" class="text-primary">{{ substr($video->link_video, 0, 20).'...' }}</a></td>
             <td>
                 <a class="btn btn-info" href="/games/{{$gameName}}/{{$video->id}}/edit">Edit</a>
-                <a class="btn btn-danger" data-bs-toggle="modal" data-bs-target="#exampleModal" data-video="{{$video->id}}">Delete</a>
+                <a class="btn btn-danger" data-bs-toggle="modal" data-bs-target="#deleteModal" data-video="{{$video->id}}">Delete</a>
             </td>
         </tr>
         @endforeach
@@ -92,7 +86,7 @@
 </script>
 
 <script>
-    $('#exampleModal').on('show.bs.modal', function(event) {
+    $('#deleteModal').on('show.bs.modal', function(event) {
         var button = $(event.relatedTarget); // Button that triggered the modal
         var videoId = button.data('video'); // Extract info from data-* attributes
         

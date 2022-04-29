@@ -142,6 +142,6 @@ class GameController extends Controller
     public function destroy($gameName){
         $game = Game::where('game_name', $gameName)->first();
         $game->delete();
-        return redirect('/games')->with('success', 'Game was deleted successfully!');
+        return redirect('/games')->with('success', $gameName.' was deleted successfully!');
     }
 }

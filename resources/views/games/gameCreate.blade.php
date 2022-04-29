@@ -8,6 +8,7 @@
 
 @section('page content')
 
+
 <form method="POST" action="/games">
     @csrf
     <div>

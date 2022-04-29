@@ -14,7 +14,7 @@
     @method('PATCH')
 
     <label class="fs-4 form-label">Select the category of the speedrun</label>
-    <select name="category_id" class="form-select mb-3 w-25" aria-label="Default select example">
+    <select name="category_id" class="form-select mb-3 w-25">
         <?php
         foreach ($categories as $category) {
             if($category->id == $video->category_id){
@@ -30,18 +30,22 @@
     <label class="fs-4 form-label">Enter the completion time of the run</label>
     <div class="row mb-3 w-25">
         <div class="col">
-            <label class="fs-5 form-label">Hours</label>
-            <input name="hours" type="number" value="{{$arrayTime['hours']}}" class="form-control" placeholder="Hs" value="{{ old('hours') }}" required>
+            <label class="mb-2">Hours</label>
+            <input name="hours" type="number" value="{{$arrayTime['hours']}}" class="form-control" placeholder="Hs" required>
         </div>
         <div class="col">
-            <label class="fs-5 form-label">Minutes</label>
-            <input name="minutes" type="number" value="{{$arrayTime['minutes']}}" class="form-control" placeholder="Min" value="{{ old('minutes') }}" required>
+            <label class="mb-2">Minutes</label>
+            <input name="minutes" type="number" value="{{$arrayTime['minutes']}}" class="form-control" placeholder="Min" required>
         </div>
         <div class="col">
-            <label class="fs-5 form-label">Seconds</label>
-            <input name="seconds" type="number" value="{{$arrayTime['seconds']}}" class="form-control" placeholder="Sec" value="{{ old('seconds') }}" required>
+            <label class="mb-2">Seconds</label>
+            <input name="seconds" type="number" value="{{$arrayTime['seconds']}}" class="form-control" placeholder="Sec" required>
         </div>
-
+        @error('hours')
+            <div class="invalid-feedback d-block" role="alert">
+                {{ $message }}
+            </div>
+        @enderror
         @error('minutes')
             <div class="invalid-feedback d-block" role="alert">
                 {{ $message }}
