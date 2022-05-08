@@ -1,0 +1,9 @@
+.rounded-4 {
+    border-radius: .9rem!important;
+}
+
+.btn:focus {
+    outline: none;
+    box-shadow: none;
+}
+

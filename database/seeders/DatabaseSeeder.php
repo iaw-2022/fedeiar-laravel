@@ -2,6 +2,8 @@
 
 namespace Database\Seeders;
 
+use App\Models\GameCategoryRelation;
+use App\Models\SpeedrunVideo;
 use Illuminate\Database\Console\Seeds\WithoutModelEvents;
 use Illuminate\Database\Seeder;
 
@@ -14,7 +16,9 @@ class DatabaseSeeder extends Seeder
      */
     public function run()
     {
-        // \App\Models\User::factory(10)->create();
         $this->call(UsersSeeder::class);
+        $this->call(GameSeeder::class);
+        $this->call(CategorySeeder::class);
+        $this->call(SpeedrunVideoSeeder::class);
     }
 }
