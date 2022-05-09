@@ -18,7 +18,7 @@ return new class extends Migration
             $table->string('category_name');
             $table->timestamps();
 
-            $table->unique(['game_id', 'category_name']);
+            $table->unique(['game_id', 'id']);
         });
     }
 
