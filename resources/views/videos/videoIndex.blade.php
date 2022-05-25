@@ -32,7 +32,7 @@
         <?php $arrayTime = SpeedrunVideoController::secondsToTime($video->completion_time_seconds); ?>
         <tr>
             <td>{{ $video->id }}</td>
-            <td>{{ $video->user->name }}</td>
+            <td>{{ $video->user->user_name }}</td>
             <td>{{ $video->game->game_name }}</td>
             <td>{{ $video->category->category_name }}</td>
             <td data-order="{{$video->completion_time_seconds}}">{{ $arrayTime['hours'].' hs, '.$arrayTime['minutes'].' m, '.$arrayTime['seconds'].' s'}}</td>

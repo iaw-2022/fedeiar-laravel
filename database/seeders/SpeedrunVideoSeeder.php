@@ -24,7 +24,7 @@ class SpeedrunVideoSeeder extends Seeder
         SpeedrunVideo::create(array(
             'link_video' => 'https://www.youtube.com/watch?v=j5j6l9ULxmI&t=108s',
             'completion_time_seconds' => '320',
-            'user_id' => User::where('name', 'bousher')->first()->id,
+            'user_id' => User::where('user_name', 'bousher')->first()->id,
             'game_id' => $game_id,
             'category_id' => Category::where('game_id', $game_id)->where('category_name', '100%')->first()->id,
         ));
@@ -33,7 +33,7 @@ class SpeedrunVideoSeeder extends Seeder
         SpeedrunVideo::create(array(
             'link_video' => 'https://www.youtube.com/watch?v=j5j6l9ULxmI&t=108s',
             'completion_time_seconds' => '324',
-            'user_id' => User::where('name', 'juan')->first()->id,
+            'user_id' => User::where('user_name', 'juan')->first()->id,
             'game_id' => $game_id,
             'category_id' => Category::where('game_id', $game_id)->where('category_name', '100%')->first()->id,
         ));
@@ -42,7 +42,7 @@ class SpeedrunVideoSeeder extends Seeder
         SpeedrunVideo::create(array(
             'link_video' => 'https://www.youtube.com/watch?v=j5j6l9ULxmI&t=108s',
             'completion_time_seconds' => '115',
-            'user_id' => User::where('name', 'juan')->first()->id,
+            'user_id' => User::where('user_name', 'juan')->first()->id,
             'game_id' => $game_id,
             'category_id' => Category::where('game_id', $game_id)->where('category_name', 'any%')->first()->id,
         ));
@@ -51,7 +51,7 @@ class SpeedrunVideoSeeder extends Seeder
         SpeedrunVideo::create(array(
             'link_video' => 'https://www.youtube.com/watch?v=j5j6l9ULxmI&t=108s',
             'completion_time_seconds' => '320',
-            'user_id' => User::where('name', 'juan')->first()->id,
+            'user_id' => User::where('user_name', 'juan')->first()->id,
             'game_id' => $game_id,
             'category_id' => Category::where('game_id', $game_id)->where('category_name', 'any%')->first()->id,
         ));
@@ -60,7 +60,7 @@ class SpeedrunVideoSeeder extends Seeder
         SpeedrunVideo::create(array(
             'link_video' => 'https://www.youtube.com/watch?v=j5j6l9ULxmI&t=108s',
             'completion_time_seconds' => '243',
-            'user_id' => User::where('name', 'juan')->first()->id,
+            'user_id' => User::where('user_name', 'juan')->first()->id,
             'game_id' => $game_id,
             'category_id' => Category::where('game_id', $game_id)->where('category_name', 'any%')->first()->id,
         ));
@@ -69,7 +69,7 @@ class SpeedrunVideoSeeder extends Seeder
         SpeedrunVideo::create(array(
             'link_video' => 'https://www.youtube.com/watch?v=j5j6l9ULxmI&t=108s',
             'completion_time_seconds' => '97',
-            'user_id' => User::where('name', 'bousher')->first()->id,
+            'user_id' => User::where('user_name', 'bousher')->first()->id,
             'game_id' => $game_id,
             'category_id' => Category::where('game_id', $game_id)->where('category_name', 'any%')->first()->id,
         ));
@@ -78,7 +78,7 @@ class SpeedrunVideoSeeder extends Seeder
         SpeedrunVideo::create(array(
             'link_video' => 'https://www.youtube.com/watch?v=j5j6l9ULxmI&t=108s',
             'completion_time_seconds' => '101',
-            'user_id' => User::where('name', 'federico')->first()->id,
+            'user_id' => User::where('user_name', 'federico')->first()->id,
             'game_id' => $game_id,
             'category_id' => Category::where('game_id', $game_id)->where('category_name', 'any%')->first()->id,
         ));
@@ -87,7 +87,7 @@ class SpeedrunVideoSeeder extends Seeder
         SpeedrunVideo::create(array(
             'link_video' => 'https://www.youtube.com/watch?v=j5j6l9ULxmI&t=108s',
             'completion_time_seconds' => '189',
-            'user_id' => User::where('name', 'juan')->first()->id,
+            'user_id' => User::where('user_name', 'juan')->first()->id,
             'game_id' => $game_id,
             'category_id' => Category::where('game_id', $game_id)->where('category_name', 'any%')->first()->id,
         ));
@@ -96,7 +96,7 @@ class SpeedrunVideoSeeder extends Seeder
         SpeedrunVideo::create(array(
             'link_video' => 'https://www.youtube.com/watch?v=j5j6l9ULxmI&t=108s',
             'completion_time_seconds' => '221',
-            'user_id' => User::where('name', 'peter')->first()->id,
+            'user_id' => User::where('user_name', 'peter')->first()->id,
             'game_id' => $game_id,
             'category_id' => Category::where('game_id', $game_id)->where('category_name', 'any%')->first()->id,
         ));
@@ -105,7 +105,7 @@ class SpeedrunVideoSeeder extends Seeder
         SpeedrunVideo::create(array(
             'link_video' => 'https://www.youtube.com/watch?v=j5j6l9ULxmI&t=108s',
             'completion_time_seconds' => '3872',
-            'user_id' => User::where('name', 'bousher')->first()->id,
+            'user_id' => User::where('user_name', 'bousher')->first()->id,
             'game_id' => $game_id,
             'category_id' => Category::where('game_id', $game_id)->where('category_name', '100%')->first()->id,
         ));
@@ -114,7 +114,7 @@ class SpeedrunVideoSeeder extends Seeder
         SpeedrunVideo::create(array(
             'link_video' => 'https://www.youtube.com/watch?v=j5j6l9ULxmI&t=108s',
             'completion_time_seconds' => '4121',
-            'user_id' => User::where('name', 'peter')->first()->id,
+            'user_id' => User::where('user_name', 'peter')->first()->id,
             'game_id' => $game_id,
             'category_id' => Category::where('game_id', $game_id)->where('category_name', '100%')->first()->id,
         ));
@@ -123,7 +123,7 @@ class SpeedrunVideoSeeder extends Seeder
         SpeedrunVideo::create(array(
             'link_video' => 'https://www.youtube.com/watch?v=j5j6l9ULxmI&t=108s',
             'completion_time_seconds' => '4324',
-            'user_id' => User::where('name', 'juan')->first()->id,
+            'user_id' => User::where('user_name', 'juan')->first()->id,
             'game_id' => $game_id,
             'category_id' => Category::where('game_id', $game_id)->where('category_name', '100%')->first()->id,
         ));
@@ -132,7 +132,7 @@ class SpeedrunVideoSeeder extends Seeder
         SpeedrunVideo::create(array(
             'link_video' => 'https://www.youtube.com/watch?v=j5j6l9ULxmI&t=108s',
             'completion_time_seconds' => '2127',
-            'user_id' => User::where('name', 'peter')->first()->id,
+            'user_id' => User::where('user_name', 'peter')->first()->id,
             'game_id' => $game_id,
             'category_id' => Category::where('game_id', $game_id)->where('category_name', 'low%')->first()->id,
         ));
@@ -141,7 +141,7 @@ class SpeedrunVideoSeeder extends Seeder
         SpeedrunVideo::create(array(
             'link_video' => 'https://www.youtube.com/watch?v=j5j6l9ULxmI&t=108s',
             'completion_time_seconds' => '1875',
-            'user_id' => User::where('name', 'juan')->first()->id,
+            'user_id' => User::where('user_name', 'juan')->first()->id,
             'game_id' => $game_id,
             'category_id' => Category::where('game_id', $game_id)->where('category_name', 'low%')->first()->id,
         ));
@@ -150,7 +150,7 @@ class SpeedrunVideoSeeder extends Seeder
         SpeedrunVideo::create(array(
             'link_video' => 'https://www.youtube.com/watch?v=j5j6l9ULxmI&t=108s',
             'completion_time_seconds' => '6125',
-            'user_id' => User::where('name', 'juan')->first()->id,
+            'user_id' => User::where('user_name', 'juan')->first()->id,
             'game_id' => $game_id,
             'category_id' => Category::where('game_id', $game_id)->where('category_name', 'glitchless')->first()->id,
         ));
@@ -159,7 +159,7 @@ class SpeedrunVideoSeeder extends Seeder
         SpeedrunVideo::create(array(
             'link_video' => 'https://www.youtube.com/watch?v=j5j6l9ULxmI&t=108s',
             'completion_time_seconds' => '8965',
-            'user_id' => User::where('name', 'juan')->first()->id,
+            'user_id' => User::where('user_name', 'juan')->first()->id,
             'game_id' => $game_id,
             'category_id' => Category::where('game_id', $game_id)->where('category_name', 'glitchless')->first()->id,
         ));

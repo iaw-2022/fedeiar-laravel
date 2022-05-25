@@ -28,7 +28,7 @@
 
             <div class="nav-item dropdown">
                 <a class="nav-link dropdown-toggle text-white-50" id="navbarDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
-                    {{auth()->user()->name}}
+                    {{auth()->user()->user_name}}
                 </a>
                 <ul class="dropdown-menu dropdown-menu-lg-end" aria-labelledby="navbarDropdown">
                     <!-- <li><a class="dropdown-item" href="#">Action</a></li>

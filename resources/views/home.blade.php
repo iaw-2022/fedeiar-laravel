@@ -8,6 +8,6 @@
 
 @section('page content')
     <p class="fs-4 lead">
-        Welcome {{auth()->user()->name}}, use the navigation bar to access all of the information.
+        Welcome {{auth()->user()->user_name}}, use the navigation bar to access all of the information.
     </p>
 @endsection
