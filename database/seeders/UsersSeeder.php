@@ -54,7 +54,7 @@ class UsersSeeder extends Seeder
             'email' => 'peter@mail.com',
             'password' => bcrypt('123'),
             'nationality' => 'United States',
-            'role' => 'administrator'
+            'role' => 'moderator'
         ));
     }
 }

@@ -15,6 +15,9 @@
             <th scope="col">Email</th>
             <th scope="col">Role</th>
             <th scope="col">Nationality</th>
+            @if (auth()->user()->role == "administrator")
+                <th>Actions</th>
+            @endif
         </tr>
     </thead>
     <tbody>
@@ -25,10 +28,23 @@
                 <td> {{ $user->email }}</td>
                 <td> {{ $user->role }}</td>
                 <td> {{ $user->nationality }}</td>
+                <td>
+                    @if( $user->role == 'administrator' )
+                        None
+                    @else
+                        <a class="btn btn-danger" data-bs-toggle="modal" data-bs-target="#deleteModal" data-game="{{ $user->user_name }}">Delete</a>
+                    @endif
+                </td>
             </tr>
         @endforeach
     </tbody>
 </table>
+
+<!-- Delete Modal -->
+@include('utilities.modal')
+
+<!-- Success flash -->
+@include('utilities.flash')
 
 <!-- Scripts -->
 <script>
@@ -36,4 +52,17 @@
         $('#usersTable').DataTable();
     });
 </script>
+
+<script>
+    $('#deleteModal').on('show.bs.modal', function(event) {
+        var button = $(event.relatedTarget); // Button that triggered the modal
+        var userName = button.data('game'); // Extract info from data-* attributes
+
+        var modal = $(this)
+        modal.find('.modal-title').text('Delete '+userName);
+        modal.find('.modal-body').text('Are you sure you want to delete the user '+userName+'? All its videos associated will be deleted.');
+        $('#deleteForm').attr('action', 'users/'+userName);
+    })
+</script>
+
 @endsection
