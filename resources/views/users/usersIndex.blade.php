@@ -28,13 +28,15 @@
                 <td> {{ $user->email }}</td>
                 <td> {{ $user->role }}</td>
                 <td> {{ $user->nationality }}</td>
-                <td>
-                    @if( $user->role == 'administrator' )
-                        None
-                    @else
-                        <a class="btn btn-danger" data-bs-toggle="modal" data-bs-target="#deleteModal" data-game="{{ $user->user_name }}">Delete</a>
-                    @endif
-                </td>
+                @if (auth()->user()->role == "administrator")
+                    <td>
+                        @if( $user->role == 'administrator' )
+                            None
+                        @else
+                            <a class="btn btn-danger" data-bs-toggle="modal" data-bs-target="#deleteModal" data-game="{{ $user->user_name }}">Delete</a>
+                        @endif
+                    </td>
+                @endif
             </tr>
         @endforeach
     </tbody>
