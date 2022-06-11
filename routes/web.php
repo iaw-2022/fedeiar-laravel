@@ -3,6 +3,7 @@
 use App\Http\Controllers\GameController;
 use App\Http\Controllers\SpeedrunVideoController;
 use App\Http\Controllers\UserController;
+use App\Http\Middleware\VerifyUserAdministrator;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -24,7 +25,12 @@ require __DIR__.'/auth.php';
 
 // Game routes
 
-Route::resource('/games', GameController::class, array('only' => array('index', 'create', 'store', 'edit', 'update', 'destroy') ) )->middleware(['auth']);
+Route::get('/games', [GameController::class, 'index'])->middleware(['auth']);
+Route::get('/games/create', [GameController::class, 'create'])->middleware(['auth', VerifyUserAdministrator::class]);
+Route::post('/games', [GameController::class, 'store'])->middleware(['auth', VerifyUserAdministrator::class]);
+Route::get('/games/{gameName}/edit', [GameController::class, 'edit'])->middleware(['auth', VerifyUserAdministrator::class]);
+Route::patch('/games/{gameName}', [GameController::class, 'update'])->middleware(['auth', VerifyUserAdministrator::class]);
+Route::delete('/games/{gameName}', [GameController::class, 'destroy'])->middleware(['auth', VerifyUserAdministrator::class]);
 
 // Video routes
 
@@ -36,5 +42,5 @@ Route::resource('/games/{gameName}', SpeedrunVideoController::class, array('only
 
 // User routes
 
-Route::get('/users', [UserController::class, 'index'])->middleware(['auth']);
-Route::delete('/users/{userName}', [UserController::class, 'destroy'])->middleware(['auth']);
+Route::get('/users', [UserController::class, 'index'])->middleware(['auth', VerifyUserAdministrator::class]);
+Route::delete('/users/{userName}', [UserController::class, 'destroy'])->middleware(['auth']); // TODO: podríamos pasarle el middleware también a este? si hacemos esto, no hace falta el chequeo en el controller no?

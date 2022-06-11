@@ -8,14 +8,18 @@
 
 @section('page content')
 
-<a class="btn btn-success mb-2" href="games/create" role="button">Add Game</a>
+@if(auth()->user()->role == 'administrator')
+    <a class="btn btn-success mb-2" href="games/create" role="button">Add Game</a>
+@endif
 
 <table id="gamesTable" class="table table-bordered" style="width:100%">
     <thead>
         <tr>
             <th>Id</th>
             <th>Game Name</th>
-            <th>Actions</th>
+            @if(auth()->user()->role == 'administrator')
+                <th>Actions</th>
+            @endif
         </tr>
     </thead>
     <tbody>
@@ -23,10 +27,12 @@
         <tr>
             <td>{{ $game->id }}</td>
             <td><a href='/games/{{ $game->game_name }}' class="text-primary"><u>{{ $game->game_name }}</u></a></td>
-            <td>
-                <a class="btn btn-info" href="games/{{$game->game_name}}/edit">Edit</a>
-                <a class="btn btn-danger" data-bs-toggle="modal" data-bs-target="#deleteModal" data-game="{{$game->game_name}}">Delete</a>
-            </td>
+            @if( auth()->user()->role == 'administrator' )
+                <td>
+                    <a class="btn btn-info" href="games/{{$game->game_name}}/edit">Edit</a>
+                    <a class="btn btn-danger" data-bs-toggle="modal" data-bs-target="#deleteModal" data-game="{{$game->game_name}}">Delete</a>
+                </td>
+            @endif
         </tr>
         @endforeach
     </tbody>

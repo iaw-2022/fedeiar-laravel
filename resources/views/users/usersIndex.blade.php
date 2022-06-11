@@ -15,9 +15,7 @@
             <th scope="col">Email</th>
             <th scope="col">Role</th>
             <th scope="col">Nationality</th>
-            @if (auth()->user()->role == "administrator")
-                <th>Actions</th>
-            @endif
+            <th>Actions</th>
         </tr>
     </thead>
     <tbody>
@@ -28,15 +26,13 @@
                 <td> {{ $user->email }}</td>
                 <td> {{ $user->role }}</td>
                 <td> {{ $user->nationality }}</td>
-                @if (auth()->user()->role == "administrator")
-                    <td>
-                        @if( $user->role == 'administrator' )
-                            None
-                        @else
-                            <a class="btn btn-danger" data-bs-toggle="modal" data-bs-target="#deleteModal" data-game="{{ $user->user_name }}">Delete</a>
-                        @endif
-                    </td>
-                @endif
+                <td>
+                    @if( $user->role == 'administrator' )
+                        None
+                    @else
+                        <a class="btn btn-danger" data-bs-toggle="modal" data-bs-target="#deleteModal" data-user="{{ $user->user_name }}">Delete</a>
+                    @endif
+                </td>
             </tr>
         @endforeach
     </tbody>
@@ -58,7 +54,7 @@
 <script>
     $('#deleteModal').on('show.bs.modal', function(event) {
         var button = $(event.relatedTarget); // Button that triggered the modal
-        var userName = button.data('game'); // Extract info from data-* attributes
+        var userName = button.data('user'); // Extract info from data-* attributes
 
         var modal = $(this)
         modal.find('.modal-title').text('Delete '+userName);
