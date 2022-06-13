@@ -9,7 +9,7 @@
 @section('page content')
 
 
-<form method="POST" action="/games">
+<form method="POST" action="/games" enctype="multipart/form-data">
     @csrf
     <div>
         <label class="fs-4 form-label">Game name</label>
@@ -19,6 +19,11 @@
                 {{ $message }}
             </div>
         @enderror
+    </div>
+
+    <div class="mb-3 mt-4">
+        <label class="fs-4 form-label">Add game image</label>
+        <input type="file" name="gameImage" class="form-control" id="gameImage" required>
     </div>
 
     <hr class="mb-3 mt-4">

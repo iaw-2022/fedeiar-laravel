@@ -6,6 +6,7 @@ use App\Models\Category;
 use App\Models\Game;
 use App\Models\SpeedrunVideo;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Storage;
 use Illuminate\Validation\Rule;
 
 class GameController extends Controller
@@ -18,6 +19,18 @@ class GameController extends Controller
     public function index()
     {
         $games = Game::all();
+        $disk = Storage::disk('google');
+        error_log($disk->exists('portal.jpg'));
+        error_log($disk->exists('celeste.jpg'));
+        
+        foreach($games as $game){
+            //error_log($disk->exists($game->image_name));
+            $req = $disk->get($game->image_name);
+            $file = fopen("images/".$game->image_name, "w");
+            fwrite($file, $req);
+            fclose($file);
+            $disk = Storage::disk('google');
+        }
         return view('games.gameIndex', ['games' => $games]);
     }
 
@@ -51,8 +64,14 @@ class GameController extends Controller
         );
 
         $game = new Game();
+
+        $file = $request->file('gameImage');
+        $fileName = $file->getClientOriginalName();
         
+        Storage::disk('google')->put($fileName, $file); // TODO: no está guardandolo en la carpeta de drive. Esta creando otra subcarpeta.
+        dd("chau");
         $game->game_name = $request->get('gameName');
+        $game->image_name = $fileName;
         $categories = $request->input('categoryName.*');
 
         $game->save();
