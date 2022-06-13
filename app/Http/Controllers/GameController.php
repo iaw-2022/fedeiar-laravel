@@ -19,7 +19,7 @@ class GameController extends Controller
     public function index()
     {
         $games = Game::all();
-        $disk = Storage::disk('google');
+        $disk = Storage::disk('google'); // TODO: solamente funciona la primer solicitud, y todas las siguientes fallan.
         error_log($disk->exists('portal.jpg'));
         error_log($disk->exists('celeste.jpg'));
         
