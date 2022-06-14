@@ -21,7 +21,9 @@ class GameController extends Controller
         $games = Game::all();
         $disk = Storage::disk('google'); // TODO: solamente funciona la primer solicitud, y todas las siguientes fallan.
         error_log($disk->exists('portal.jpg'));
+        
         error_log($disk->exists('celeste.jpg'));
+        
         
         foreach($games as $game){
             //error_log($disk->exists($game->image_name));
@@ -29,7 +31,7 @@ class GameController extends Controller
             $file = fopen("images/".$game->image_name, "w");
             fwrite($file, $req);
             fclose($file);
-            $disk = Storage::disk('google');
+            //$disk = Storage::disk('google');
         }
         return view('games.gameIndex', ['games' => $games]);
     }
@@ -68,8 +70,8 @@ class GameController extends Controller
         $file = $request->file('gameImage');
         $fileName = $file->getClientOriginalName();
         
-        Storage::disk('google')->put($fileName, $file); // TODO: no está guardandolo en la carpeta de drive. Esta creando otra subcarpeta.
-        dd("chau");
+        Storage::disk('google')->put($fileName, $file->get());
+        
         $game->game_name = $request->get('gameName');
         $game->image_name = $fileName;
         $categories = $request->input('categoryName.*');
