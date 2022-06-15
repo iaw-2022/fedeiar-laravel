@@ -12,7 +12,7 @@
     <a class="btn btn-success mb-2" href="games/create" role="button">Add Game</a>
 @endif
 
-<table id="gamesTable" class="table table-bordered" style="width:100%">
+<table id="gamesTable" class="table table-bordered align-middle">
     <thead>
         <tr>
             <th>Id</th>
@@ -27,7 +27,7 @@
         @foreach($games as $game)
         <tr>
             <td>{{ $game->id }}</td>
-            <td><img src="/images/{{$game->id}}.jpg" width="150" height="50"></td> 
+            <td style="width: 10%" class="text-center"><img class="rounded" src="/images/{{$game->id}}.jpg" width="150"></td> 
             <td><a href='/games/{{ $game->game_name }}' class="text-primary"><u>{{ $game->game_name }}</u></a></td>
             @if( auth()->user()->role == 'administrator' )
                 <td>

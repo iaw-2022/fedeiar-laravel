@@ -22,13 +22,13 @@ class GameController extends Controller
     
         foreach($games as $game){
             $image_route = "images/".$game->id.".jpg";
-            if(!file_exists($image_route)){
+            //if(!file_exists($image_route)){ // TODO: preguntar como hacer para chequear esto sin romper cuando se updatea.
                 $image = stream_get_contents($game->image);
                 $image = base64_decode($image);
                 $file = fopen($image_route, "w");
                 fwrite($file, $image);
                 fclose($file);
-            }
+            //}
         }
         return view('games.gameIndex', ['games' => $games]);
     }
@@ -66,11 +66,12 @@ class GameController extends Controller
 
         $game = new Game();
 
+        $game->game_name = $request->get('gameName');
+
         $file = $request->file('gameImage');
         $file = base64_encode($file->get());
-        
-        $game->game_name = $request->get('gameName');
         $game->image = $file;
+
         $categories = $request->input('categoryName.*');
 
         $game->save();
@@ -96,7 +97,8 @@ class GameController extends Controller
      * @return \Illuminate\Http\Response
      */
     public function edit($gameName){
-        $categories = Game::where('game_name', $gameName)->first()->categories;
+        $game = Game::where('game_name', $gameName)->first();
+        $categories = $game->categories;
         return view('games.gameEdit', ['gameName' => $gameName, 'categories' => $categories]);
     }
 
@@ -119,7 +121,7 @@ class GameController extends Controller
             'categoryName.*.required' => 'Category name cannot be empty!',
         ]
         );
-        
+
         $oldCategories = Game::where('game_name', $gameName)->first()->categories;
         $newCategories = $request->input('categoryName.*');
 
@@ -132,6 +134,12 @@ class GameController extends Controller
         $game = Game::where('game_name', $gameName)->first();
 
         $game->game_name = $request->get('gameName');
+
+        $file = $request->file('gameImage');
+        if($file != null){
+            $file = base64_encode($file->get());
+            $game->image = $file;
+        }
 
         $game->update();
 

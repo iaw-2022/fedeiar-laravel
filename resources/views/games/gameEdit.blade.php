@@ -9,7 +9,7 @@
 @section('page content')
 
 
-<form method="POST" action="/games/{{$gameName}}">
+<form method="POST" action="/games/{{$gameName}}" enctype="multipart/form-data">
     @csrf
     @method('PUT')
     <div>
@@ -20,6 +20,12 @@
                 {{ $message }}
             </div>
         @enderror
+    </div>
+
+    <div class="mb-3 mt-4">
+        <label class="fs-4 form-label">Change game image</label>
+        <input type="file" name="gameImage" class="form-control" id="gameImage">
+        <div class="form-text">If you wish to keep the same image, just don't upload anything.</div>
     </div>
 
     <hr class="mb-3 mt-4">

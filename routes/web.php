@@ -29,7 +29,7 @@ Route::get('/games', [GameController::class, 'index'])->middleware(['auth']);
 Route::get('/games/create', [GameController::class, 'create'])->middleware(['auth', VerifyUserAdministrator::class]);
 Route::post('/games', [GameController::class, 'store'])->middleware(['auth', VerifyUserAdministrator::class]);
 Route::get('/games/{gameName}/edit', [GameController::class, 'edit'])->middleware(['auth', VerifyUserAdministrator::class]);
-Route::patch('/games/{gameName}', [GameController::class, 'update'])->middleware(['auth', VerifyUserAdministrator::class]);
+Route::put('/games/{gameName}', [GameController::class, 'update'])->middleware(['auth', VerifyUserAdministrator::class]);
 Route::delete('/games/{gameName}', [GameController::class, 'destroy'])->middleware(['auth', VerifyUserAdministrator::class]);
 
 // Video routes
