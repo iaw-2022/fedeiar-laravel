@@ -19,19 +19,16 @@ class GameController extends Controller
     public function index()
     {
         $games = Game::all();
-        $disk = Storage::disk('google'); // TODO: solamente funciona la primer solicitud, y todas las siguientes fallan.
-        error_log($disk->exists('portal.jpg'));
-        
-        error_log($disk->exists('celeste.jpg'));
-        
-        
+    
         foreach($games as $game){
-            //error_log($disk->exists($game->image_name));
-            $req = $disk->get($game->image_name);
-            $file = fopen("images/".$game->image_name, "w");
-            fwrite($file, $req);
-            fclose($file);
-            //$disk = Storage::disk('google');
+            $image_route = "images/".$game->id.".jpg";
+            if(!file_exists($image_route)){
+                $image = stream_get_contents($game->image);
+                $image = base64_decode($image);
+                $file = fopen($image_route, "w");
+                fwrite($file, $image);
+                fclose($file);
+            }
         }
         return view('games.gameIndex', ['games' => $games]);
     }
@@ -55,11 +52,13 @@ class GameController extends Controller
     public function store(Request $request){
         $request->validate([
             'gameName' => 'required|unique:games,game_name',
+            'gameImage' => 'required',
             'categoryName' => 'required|array|min:1',
             'categoryName.*' => 'required'
         ],
         [
             'gameName.unique' => 'The game with that name has already been created.',
+            'gameImage.required' => 'An image is needed.',
             'categoryName.required' => 'Add at least one category.',
             'categoryName.*.required' => 'Category name cannot be empty!',
         ]
@@ -68,12 +67,10 @@ class GameController extends Controller
         $game = new Game();
 
         $file = $request->file('gameImage');
-        $fileName = $file->getClientOriginalName();
-        
-        Storage::disk('google')->put($fileName, $file->get());
+        $file = base64_encode($file->get());
         
         $game->game_name = $request->get('gameName');
-        $game->image_name = $fileName;
+        $game->image = $file;
         $categories = $request->input('categoryName.*');
 
         $game->save();

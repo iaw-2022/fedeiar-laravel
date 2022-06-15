@@ -27,7 +27,7 @@
         @foreach($games as $game)
         <tr>
             <td>{{ $game->id }}</td>
-            <td><img src="/images/{{$game->image_name}}" width="150" height="50"></td> 
+            <td><img src="/images/{{$game->id}}.jpg" width="150" height="50"></td> 
             <td><a href='/games/{{ $game->game_name }}' class="text-primary"><u>{{ $game->game_name }}</u></a></td>
             @if( auth()->user()->role == 'administrator' )
                 <td>

@@ -24,6 +24,11 @@
     <div class="mb-3 mt-4">
         <label class="fs-4 form-label">Add game image</label>
         <input type="file" name="gameImage" class="form-control" id="gameImage" required>
+        @error('gameImage')
+            <div class="invalid-feedback d-block" role="alert">
+                {{ $message }}
+            </div>
+        @enderror
     </div>
 
     <hr class="mb-3 mt-4">
