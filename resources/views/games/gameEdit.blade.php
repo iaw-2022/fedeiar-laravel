@@ -14,7 +14,7 @@
     @method('PUT')
     <div>
         <label class="fs-4 form-label">Game name</label>
-        <input type="text" name="gameName" value="{{ old('gameName', $gameName) }}" placeholder="Game name" class="form-control" required>
+        <input type="text" name="gameName" value="{{ old('gameName', $gameName) }}" placeholder="Game name" class="form-control w-25" required>
         @error('gameName')
             <div class="invalid-feedback d-block" role="alert">
                 {{ $message }}
@@ -24,7 +24,7 @@
 
     <div class="mb-3 mt-4">
         <label class="fs-4 form-label">Change game image</label>
-        <input type="file" name="gameImage" class="form-control" id="gameImage">
+        <input type="file" name="gameImage" class="form-control w-50" id="gameImage">
         <div class="form-text">If you wish to keep the same image, just don't upload anything.</div>
     </div>
 

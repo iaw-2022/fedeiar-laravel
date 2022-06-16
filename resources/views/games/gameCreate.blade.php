@@ -13,7 +13,7 @@
     @csrf
     <div>
         <label class="fs-4 form-label">Game name</label>
-        <input type="text" name="gameName" value="{{ old('gameName') }}" placeholder="Game name" class="form-control" required>
+        <input type="text" name="gameName" value="{{ old('gameName') }}" placeholder="Game name" class="form-control w-25" required>
         @error('gameName')
             <div class="invalid-feedback d-block" role="alert">
                 {{ $message }}
@@ -23,7 +23,7 @@
 
     <div class="mb-3 mt-4">
         <label class="fs-4 form-label">Add game image</label>
-        <input type="file" name="gameImage" class="form-control" id="gameImage" required>
+        <input type="file" name="gameImage" class="form-control w-50" id="gameImage" required>
         @error('gameImage')
             <div class="invalid-feedback d-block" role="alert">
                 {{ $message }}

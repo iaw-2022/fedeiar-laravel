@@ -43,4 +43,4 @@ Route::resource('/games/{gameName}', SpeedrunVideoController::class, array('only
 // User routes
 
 Route::get('/users', [UserController::class, 'index'])->middleware(['auth', VerifyUserAdministrator::class]);
-Route::delete('/users/{userName}', [UserController::class, 'destroy'])->middleware(['auth']); // TODO: podríamos pasarle el middleware también a este? si hacemos esto, no hace falta el chequeo en el controller no?
+Route::delete('/users/{userName}', [UserController::class, 'destroy'])->middleware(['auth']);

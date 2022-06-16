@@ -22,14 +22,13 @@ class GameController extends Controller
     
         foreach($games as $game){
             $image_route = "images/".$game->id.".jpg";
-            //if(!file_exists($image_route)){ // TODO: preguntar como hacer para chequear esto sin romper cuando se updatea.
-                $image = stream_get_contents($game->image);
-                $image = base64_decode($image);
-                $file = fopen($image_route, "w");
-                fwrite($file, $image);
-                fclose($file);
-            //}
+            $image = stream_get_contents($game->image);
+            $image = base64_decode($image);
+            $file = fopen($image_route, "w");
+            fwrite($file, $image);
+            fclose($file);
         }
+        
         return view('games.gameIndex', ['games' => $games]);
     }
 
