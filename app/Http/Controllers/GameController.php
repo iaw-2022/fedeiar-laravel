@@ -21,12 +21,15 @@ class GameController extends Controller
         $games = Game::all();
     
         foreach($games as $game){
-            $image_route = "images/".$game->id.".jpg";
-            $image = stream_get_contents($game->image);
-            $image = base64_decode($image);
-            $file = fopen($image_route, "w");
-            fwrite($file, $image);
-            fclose($file);
+            $updated_at = str_replace(":", "_", $game->updated_at);
+            $image_route = "images/".$game->id."_".$updated_at.".jpg";
+            if(!file_exists($image_route)){
+                $image = stream_get_contents($game->image);
+                $image = base64_decode($image);
+                $file = fopen($image_route, "w");
+                fwrite($file, $image);
+                fclose($file);
+            }
         }
         
         return view('games.gameIndex', ['games' => $games]);
@@ -136,6 +139,10 @@ class GameController extends Controller
 
         $file = $request->file('gameImage');
         if($file != null){
+            $updated_at = str_replace(":", "_", $game->updated_at);
+            $image_route = "images/".$game->id."_".$updated_at.".jpg";
+            unlink($image_route); // Borramos la imagen anterior
+            
             $file = base64_encode($file->get());
             $game->image = $file;
         }
