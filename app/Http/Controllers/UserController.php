@@ -82,6 +82,9 @@ class UserController extends Controller
     public function destroy($userName)
     {   
         $user = User::where('user_name', $userName)->first();
+        if($user->role == 'administrator'){
+            abort(403);
+        }
         $user->delete();
         return redirect('/users')->with('success', 'User '.$userName.' was deleted successfully!');
     }
