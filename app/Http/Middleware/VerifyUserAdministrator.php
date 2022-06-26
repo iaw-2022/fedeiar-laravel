@@ -18,7 +18,6 @@ class VerifyUserAdministrator
     {
         if(auth()->user()->role != 'administrator'){
             abort(404);
-            // return redirect('/');
         }
 
         return $next($request);
