@@ -56,5 +56,12 @@ class UsersSeeder extends Seeder
             'nationality' => 'United States',
             'role' => 'moderator'
         ));
+
+        User::create(array(
+            'user_name' => 'pedro_react',
+            'email' => 'pedro@mail.com',
+            'nationality' => 'Uruguay',
+            'role' => 'final_user'
+        ));
     }
 }
